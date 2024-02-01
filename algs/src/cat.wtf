@@ -1,0 +1,3 @@
+path = "./input/hello.txt"
+greetings = rd(path)
+prnt(greetings)
