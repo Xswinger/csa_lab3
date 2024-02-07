@@ -2,7 +2,6 @@ from isa import Opcode, write_code
 import sys
 
 def symbols():
-    """Полное множество символов языка brainfuck."""
     return {"<", ">", "+", "-", ",", ".", "[", "]", "="}
 
 def symbol_to_opcode(symbol):

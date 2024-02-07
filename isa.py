@@ -2,15 +2,26 @@ import json
 from enum import Enum
 
 class Opcode(str, Enum):
-    EQUAL = "equal"
-    SUM = "sum"
-    DIF = "dif"
+    ADD = "add"
+    SUB = "sub"
+    INC = "inc"
+    DEC = "dec"
+    HALT = "halt"
+    EI = "ei"
+    DI = "di"
+    CMP = "cmp"
 
+    IRET = "iret"
+    
     JMP = "jmp"
 
 
     def __str__(self):
         return str(self.value)
+    
+branch_instr = [Opcode.JMP]
+proc_instr = [Opcode.IRET]
+arithm_instr = [Opcode.ADD, Opcode.SUB, Opcode.INC, Opcode.DEC, Opcode.HALT, Opcode.EI, Opcode.DI, Opcode.CMP]
 
 def write_code(filename, code):
     with open(filename, "w", encoding="utf-8") as file:
@@ -22,4 +33,4 @@ def write_code(filename, code):
 
 def read_code(filename):
     with open(filename, encoding="utf-8") as file:
-        return json.loads(file.read())  #  code
+        return json.loads(file.read())
