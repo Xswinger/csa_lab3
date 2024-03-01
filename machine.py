@@ -14,7 +14,6 @@ class HaltError(Exception):
 class DataPath:
 
     data_memory_size = None
-    # размер памяти данных
 
     data_memory = None
     # память данных
