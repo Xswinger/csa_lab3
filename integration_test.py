@@ -8,6 +8,7 @@ import machine
 import pytest
 import translator
 
+
 @pytest.mark.golden_test("golden/*.yml")
 def test_translator_and_machine(golden, caplog):
     # Установим уровень отладочного вывода на DEBUG
@@ -37,7 +38,7 @@ def test_translator_and_machine(golden, caplog):
         # Выходные данные также считываем в переменные.
         with open(instr_target, encoding="utf-8") as file:
             code = file.read()
-        
+
         with open(data_target, encoding="utf-8") as file:
             mem = file.read()
 

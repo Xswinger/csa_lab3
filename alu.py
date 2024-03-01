@@ -1,13 +1,14 @@
 from enum import Enum
 from typing import ClassVar
 
+
 class ALUOpcode(str, Enum):
     ADD = "add"
     CMP = "cmp"
     TEST = "test"
-    INC_A = "inc_a" 
-    INC_B = "inc_b" 
-    DEC_A = "dec_a" 
+    INC_A = "inc_a"
+    INC_B = "inc_b"
+    DEC_A = "dec_a"
     DEC_B = "dec_b"
     SKIP_A = "skip_a"
     SKIP_B = "skip_b"
@@ -15,18 +16,18 @@ class ALUOpcode(str, Enum):
     def __str__(self) -> str:
         return str(self.value)
 
-class ALU:
 
+class ALU:
     operations: ClassVar = [
         ALUOpcode.ADD,
         ALUOpcode.CMP,
         ALUOpcode.TEST,
-        ALUOpcode.INC_A, 
+        ALUOpcode.INC_A,
         ALUOpcode.INC_B,
         ALUOpcode.DEC_A,
         ALUOpcode.DEC_B,
         ALUOpcode.SKIP_A,
-        ALUOpcode.SKIP_B
+        ALUOpcode.SKIP_B,
     ]
 
     src_left = None
@@ -38,11 +39,10 @@ class ALU:
     n_flag: ClassVar[bool] = None
     z_flag: ClassVar[bool] = None
 
-
     def __init__(self):
         self.src_left = None
         self.src_right = None
-        
+
         self.result = 0
         self.operation = None
 

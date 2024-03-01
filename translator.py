@@ -3,20 +3,9 @@ import sys
 
 data = [0] * 100
 
+
 def symbols(symbol) -> Opcode:
-    return {
-        "add", 
-        "addi", 
-        "sub", 
-        "inc",
-        "dec",
-        "halt",
-        "ei",
-        "di",
-        "cmp",
-        "iret",
-        "jmp"
-    }
+    return {"add", "addi", "sub", "inc", "dec", "halt", "ei", "di", "cmp", "iret", "jmp"}
 
 
 def symbol_to_opcode(symbol):
@@ -39,6 +28,7 @@ def symbol_to_opcode(symbol):
         "jmp": Opcode.JMP,
     }.get(symbol, Opcode.NOP)
 
+
 # чтение файла
 def read_lines(source_filename: str) -> tuple[list[str], int]:
     source_loc = 0
@@ -50,6 +40,7 @@ def read_lines(source_filename: str) -> tuple[list[str], int]:
             if line != "":
                 lines.append(line)
     return lines, source_loc
+
 
 # строки кода в операторы
 def lines_to_words_and_labels(code_lines) -> tuple[dict, dict]:
@@ -73,6 +64,7 @@ def lines_to_words_and_labels(code_lines) -> tuple[dict, dict]:
             words[position] = kv
             position += 1
     return words, labels
+
 
 # Индексация слова данных (в т.ч. разбиение строк по буквам)
 def parse_word(position, memory_position, word_line, words, labels) -> tuple[int, dict]:
@@ -105,6 +97,7 @@ def parse_word(position, memory_position, word_line, words, labels) -> tuple[int
                 memory_position += 1
     return position, memory_position, words
 
+
 # Подмена меток на индексы + установка вида адресации (True - косвенный)
 def link_labels(words, labels) -> dict:
     replaced = {}
@@ -124,6 +117,7 @@ def link_labels(words, labels) -> dict:
         replaced[w_index] = word
     return replaced
 
+
 def find_program_start(labels) -> int:
     counter = 0
     position = None
@@ -134,6 +128,7 @@ def find_program_start(labels) -> int:
     assert counter == 1, f"Error: got _start label {counter} times"
     return position + 1
 
+
 # трансляция в машинный код
 def to_machine_code(raw_code, _start_position) -> list:
     code = [{"index": 0, "opcode": Opcode.JMP, "arg1": _start_position, "arg2": 0, "arg3": 0, "is_indirect": False}]
@@ -141,58 +136,60 @@ def to_machine_code(raw_code, _start_position) -> list:
     for index, word in raw_code.items():
         if len(word) == 2:
             instr = {
-                    "index": index + 1,
-                    "opcode": symbol_to_opcode(word[0]),
-                    "arg1": 0,
-                    "arg2": 0,
-                    "arg3": 0,
-                    "is_indirect": word[-1]
-                }
+                "index": index + 1,
+                "opcode": symbol_to_opcode(word[0]),
+                "arg1": 0,
+                "arg2": 0,
+                "arg3": 0,
+                "is_indirect": word[-1],
+            }
         elif len(word) == 3:
             instr = {
-                    "index": index + 1,
-                    "opcode": symbol_to_opcode(word[0]),
-                    "arg1": word[1],
-                    "arg2": 0,
-                    "arg3": 0,
-                    "is_indirect": word[-1]
-                }
+                "index": index + 1,
+                "opcode": symbol_to_opcode(word[0]),
+                "arg1": word[1],
+                "arg2": 0,
+                "arg3": 0,
+                "is_indirect": word[-1],
+            }
         elif len(word) == 4:
             instr = {
-                    "index": index + 1,
-                    "opcode": symbol_to_opcode(word[0]),
-                    "arg1": word[1],
-                    "arg2": word[2],
-                    "arg3": 0,
-                    "is_indirect": word[-1]
-                }
+                "index": index + 1,
+                "opcode": symbol_to_opcode(word[0]),
+                "arg1": word[1],
+                "arg2": word[2],
+                "arg3": 0,
+                "is_indirect": word[-1],
+            }
         elif len(word) == 5:
             instr = {
-                    "index": index + 1,
-                    "opcode": symbol_to_opcode(word[0]),
-                    "arg1": word[1],
-                    "arg2": word[2],
-                    "arg3": word[3],
-                    "is_indirect": word[-1]
-                }
+                "index": index + 1,
+                "opcode": symbol_to_opcode(word[0]),
+                "arg1": word[1],
+                "arg2": word[2],
+                "arg3": word[3],
+                "is_indirect": word[-1],
+            }
         else:
             raise f"Incorrect operands count = {len(word)}"
         code.append(instr)
     return code
+
 
 # Трансляция программы в машинный код
 def translate(source_filename) -> tuple[list, int]:
     lines, source_loc = read_lines(source_filename)
 
     instrs, labels = lines_to_words_and_labels(lines)
-    
+
     raw_code = link_labels(instrs, labels)
-    
+
     _start_position = find_program_start(labels)
 
     code = to_machine_code(raw_code, _start_position)
-    
+
     return code, data, source_loc
+
 
 def main(source_filename, prog_filename, data_filename):
     global data
