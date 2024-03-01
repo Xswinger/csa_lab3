@@ -7,11 +7,8 @@ from isa import Opcode, write_code, write_memory
 data = [0] * 100
 
 
-def symbols(symbol) -> Opcode:
-    return {"add", "addi", "sub", "inc", "dec", "halt", "ei", "di", "cmp", "iret", "jmp"}
 
-
-def symbol_to_opcode(symbol):
+def command_to_opcode(symbol):
     return {
         "nop": Opcode.NOP,
         "halt": Opcode.HALT,
@@ -32,7 +29,7 @@ def symbol_to_opcode(symbol):
     }.get(symbol, Opcode.NOP)
 
 
-# чтение файла
+# чтение файла, разделение на строки
 def read_lines(source_filename: str) -> tuple[list[str], int]:
     source_loc = 0
     lines = []
@@ -45,7 +42,7 @@ def read_lines(source_filename: str) -> tuple[list[str], int]:
     return lines, source_loc
 
 
-# строки кода в операторы
+# строки кода в инструкции и метки
 def lines_to_words_and_labels(code_lines) -> tuple[dict, dict]:
     labels = {}
     words = {}
@@ -119,7 +116,7 @@ def link_labels(words, labels) -> dict:
         replaced[w_index] = word
     return replaced
 
-
+# Нахождение метки начала программы для корректного стартового jmp
 def find_program_start(labels) -> int:
     counter = 0
     position = None
@@ -131,14 +128,14 @@ def find_program_start(labels) -> int:
     return position + 1
 
 
-# трансляция в машинный код
+# трансляция переходного кода в машинный код
 def to_machine_code(raw_code, _start_position) -> list:
     code = [{"index": 0, "opcode": Opcode.JMP, "arg1": _start_position, "arg2": 0, "arg3": 0, "is_indirect": False}]
     for index, word in raw_code.items():
         if len(word) == 2:
             instr = {
                 "index": index + 1,
-                "opcode": symbol_to_opcode(word[0]),
+                "opcode": command_to_opcode(word[0]),
                 "arg1": 0,
                 "arg2": 0,
                 "arg3": 0,
@@ -147,7 +144,7 @@ def to_machine_code(raw_code, _start_position) -> list:
         elif len(word) == 3:
             instr = {
                 "index": index + 1,
-                "opcode": symbol_to_opcode(word[0]),
+                "opcode": command_to_opcode(word[0]),
                 "arg1": word[1],
                 "arg2": 0,
                 "arg3": 0,
@@ -156,7 +153,7 @@ def to_machine_code(raw_code, _start_position) -> list:
         elif len(word) == 4:
             instr = {
                 "index": index + 1,
-                "opcode": symbol_to_opcode(word[0]),
+                "opcode": command_to_opcode(word[0]),
                 "arg1": word[1],
                 "arg2": word[2],
                 "arg3": 0,
@@ -165,7 +162,7 @@ def to_machine_code(raw_code, _start_position) -> list:
         elif len(word) == 5:
             instr = {
                 "index": index + 1,
-                "opcode": symbol_to_opcode(word[0]),
+                "opcode": command_to_opcode(word[0]),
                 "arg1": word[1],
                 "arg2": word[2],
                 "arg3": word[3],
