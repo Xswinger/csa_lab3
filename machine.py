@@ -51,7 +51,6 @@ class DataPath:
     # АЛУ
 
     input_buffer = None
-    # буфер входных данных
 
     output_buffer = None
     # буфер выходных данных
