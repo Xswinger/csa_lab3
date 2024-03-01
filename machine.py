@@ -2,7 +2,7 @@ import sys
 import logging
 import json
 
-from typing import Optional, ClassVar
+from typing import Optional
 from isa import Opcode, Selectors, rrr_format_instr, rri_format_instr, ri_format_instr, i_format_instr, ProgramMode
 from alu import ALU, ALUOpcode
 
