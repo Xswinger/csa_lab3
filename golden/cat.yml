@@ -49,7 +49,7 @@ out_code: |-
    {"index": 12, "opcode": "cmp", "arg1": "sr1", "arg2": 3, "arg3": 0, "is_indirect": false},
    {"index": 13, "opcode": "je", "arg1": 10, "arg2": 0, "arg3": 0, "is_indirect": false},
    {"index": 14, "opcode": "halt", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false}]
-out_mem: |
+out_mem: |-
   [98,
    99,
    0,

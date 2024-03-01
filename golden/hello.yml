@@ -34,7 +34,7 @@ out_code: |-
    {"index": 8, "opcode": "inc", "arg1": "sr1", "arg2": 0, "arg3": 0, "is_indirect": false},
    {"index": 9, "opcode": "jmp", "arg1": 2, "arg2": 0, "arg3": 0, "is_indirect": false},
    {"index": 10, "opcode": "halt", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false}]
-out_mem: |
+out_mem: |-
   [72,
    101,
    108,
