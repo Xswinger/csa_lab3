@@ -140,117 +140,117 @@ out_stdout: |
   Hello, World
   instr_counter:  100 ticks: 413
 out_log: |
-  DEBUG:root:TICK:    3 | PC:   1 | IR: jmp   | DR:   1 | SR1: None | SR2: None | SR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal
-  DEBUG:root:TICK:    7 | PC:   2 | IR: load  | DR:   0 | SR1: None | SR2: None | SR3: None | AR:  14 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: normal
-  DEBUG:root:TICK:   11 | PC:   3 | IR: load  | DR:  47 | SR1: None | SR2:  47 | SR3: None | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal 
-  DEBUG:root:TICK:   17 | PC:   4 | IR: load  | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal  
-  DEBUG:root:TICK:   21 | PC:   5 | IR: cmp   | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal  
-  DEBUG:root:TICK:   23 | PC:   6 | IR: je    | DR:  44 | SR1: None | SR2:  47 | SR3:  72 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal  
-  DEBUG:root:TICK:   29 | PC:   7 | IR: load  | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal  
-  DEBUG:root:output_buffer: '' << 'H'
-  DEBUG:root:TICK:   34 | PC:   8 | IR: store | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal  
-  DEBUG:root:TICK:   37 | PC:   9 | IR: inc   | DR: 111 | SR1:   1 | SR2:  47 | SR3:  72 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal   
-  DEBUG:root:TICK:   40 | PC:   2 | IR: jmp   | DR:   2 | SR1:   1 | SR2:  47 | SR3:  72 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:   44 | PC:   3 | IR: load  | DR:  47 | SR1:   1 | SR2:  47 | SR3:  72 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:   50 | PC:   4 | IR: load  | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 101 | mode: normal
-  DEBUG:root:TICK:   54 | PC:   5 | IR: cmp   | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:   56 | PC:   6 | IR: je    | DR:  44 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:   62 | PC:   7 | IR: load  | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 101 | mode: normal
-  DEBUG:root:output_buffer: 'H' << 'e'
-  DEBUG:root:TICK:   67 | PC:   8 | IR: store | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 101 | mode: normal
-  DEBUG:root:TICK:   70 | PC:   9 | IR: inc   | DR: 111 | SR1:   2 | SR2:  47 | SR3: 101 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:   73 | PC:   2 | IR: jmp   | DR:   2 | SR1:   2 | SR2:  47 | SR3: 101 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:   77 | PC:   3 | IR: load  | DR:  47 | SR1:   2 | SR2:  47 | SR3: 101 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:   83 | PC:   4 | IR: load  | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:TICK:   87 | PC:   5 | IR: cmp   | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:   89 | PC:   6 | IR: je    | DR:  44 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:   95 | PC:   7 | IR: load  | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:output_buffer: 'He' << 'l'
-  DEBUG:root:TICK:  100 | PC:   8 | IR: store | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:TICK:  103 | PC:   9 | IR: inc   | DR: 111 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  106 | PC:   2 | IR: jmp   | DR:   2 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  110 | PC:   3 | IR: load  | DR:  47 | SR1:   3 | SR2:  47 | SR3: 108 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  116 | PC:   4 | IR: load  | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:TICK:  120 | PC:   5 | IR: cmp   | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  122 | PC:   6 | IR: je    | DR:  44 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  128 | PC:   7 | IR: load  | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:output_buffer: 'Hel' << 'l'
-  DEBUG:root:TICK:  133 | PC:   8 | IR: store | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:TICK:  136 | PC:   9 | IR: inc   | DR: 111 | SR1:   4 | SR2:  47 | SR3: 108 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  139 | PC:   2 | IR: jmp   | DR:   2 | SR1:   4 | SR2:  47 | SR3: 108 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  143 | PC:   3 | IR: load  | DR:  47 | SR1:   4 | SR2:  47 | SR3: 108 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  149 | PC:   4 | IR: load  | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  153 | PC:   5 | IR: cmp   | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  155 | PC:   6 | IR: je    | DR:  44 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  161 | PC:   7 | IR: load  | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:output_buffer: 'Hell' << 'o'
-  DEBUG:root:TICK:  166 | PC:   8 | IR: store | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  169 | PC:   9 | IR: inc   | DR: 111 | SR1:   5 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  172 | PC:   2 | IR: jmp   | DR:   2 | SR1:   5 | SR2:  47 | SR3: 111 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  176 | PC:   3 | IR: load  | DR:  47 | SR1:   5 | SR2:  47 | SR3: 111 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  182 | PC:   4 | IR: load  | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  186 | PC:   5 | IR: cmp   | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  188 | PC:   6 | IR: je    | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  194 | PC:   7 | IR: load  | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:output_buffer: 'Hello' << ','
-  DEBUG:root:TICK:  199 | PC:   8 | IR: store | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  202 | PC:   9 | IR: inc   | DR: 111 | SR1:   6 | SR2:  47 | SR3:  44 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  205 | PC:   2 | IR: jmp   | DR:   2 | SR1:   6 | SR2:  47 | SR3:  44 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  209 | PC:   3 | IR: load  | DR:  47 | SR1:   6 | SR2:  47 | SR3:  44 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  215 | PC:   4 | IR: load  | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  32 | mode: normal
-  DEBUG:root:TICK:  219 | PC:   5 | IR: cmp   | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  221 | PC:   6 | IR: je    | DR:  44 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  227 | PC:   7 | IR: load  | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  32 | mode: normal
-  DEBUG:root:output_buffer: 'Hello,' << ' '
-  DEBUG:root:TICK:  232 | PC:   8 | IR: store | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  32 | mode: normal
-  DEBUG:root:TICK:  235 | PC:   9 | IR: inc   | DR: 111 | SR1:   7 | SR2:  47 | SR3:  32 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  238 | PC:   2 | IR: jmp   | DR:   2 | SR1:   7 | SR2:  47 | SR3:  32 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  242 | PC:   3 | IR: load  | DR:  47 | SR1:   7 | SR2:  47 | SR3:  32 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  248 | PC:   4 | IR: load  | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  87 | mode: normal
-  DEBUG:root:TICK:  252 | PC:   5 | IR: cmp   | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  254 | PC:   6 | IR: je    | DR:  44 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  260 | PC:   7 | IR: load  | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  87 | mode: normal
-  DEBUG:root:output_buffer: 'Hello, ' << 'W'
-  DEBUG:root:TICK:  265 | PC:   8 | IR: store | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  87 | mode: normal
-  DEBUG:root:TICK:  268 | PC:   9 | IR: inc   | DR: 111 | SR1:   8 | SR2:  47 | SR3:  87 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  271 | PC:   2 | IR: jmp   | DR:   2 | SR1:   8 | SR2:  47 | SR3:  87 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  275 | PC:   3 | IR: load  | DR:  47 | SR1:   8 | SR2:  47 | SR3:  87 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  281 | PC:   4 | IR: load  | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  285 | PC:   5 | IR: cmp   | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  287 | PC:   6 | IR: je    | DR:  44 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  293 | PC:   7 | IR: load  | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:output_buffer: 'Hello, W' << 'o'
-  DEBUG:root:TICK:  298 | PC:   8 | IR: store | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  301 | PC:   9 | IR: inc   | DR: 111 | SR1:   9 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  304 | PC:   2 | IR: jmp   | DR:   2 | SR1:   9 | SR2:  47 | SR3: 111 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  308 | PC:   3 | IR: load  | DR:  47 | SR1:   9 | SR2:  47 | SR3: 111 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  314 | PC:   4 | IR: load  | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  318 | PC:   5 | IR: cmp   | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  320 | PC:   6 | IR: je    | DR:  44 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  326 | PC:   7 | IR: load  | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:output_buffer: 'Hello, Wo' << 'r'
-  DEBUG:root:TICK:  331 | PC:   8 | IR: store | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  334 | PC:   9 | IR: inc   | DR: 111 | SR1:  10 | SR2:  47 | SR3: 114 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  337 | PC:   2 | IR: jmp   | DR:   2 | SR1:  10 | SR2:  47 | SR3: 114 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  341 | PC:   3 | IR: load  | DR:  47 | SR1:  10 | SR2:  47 | SR3: 114 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  347 | PC:   4 | IR: load  | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:  10 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:TICK:  351 | PC:   5 | IR: cmp   | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  353 | PC:   6 | IR: je    | DR:  44 | SR1:  10 | SR2:  47 | SR3: 108 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  359 | PC:   7 | IR: load  | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:  10 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:output_buffer: 'Hello, Wor' << 'l'
-  DEBUG:root:TICK:  364 | PC:   8 | IR: store | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
-  DEBUG:root:TICK:  367 | PC:   9 | IR: inc   | DR: 111 | SR1:  11 | SR2:  47 | SR3: 108 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  370 | PC:   2 | IR: jmp   | DR:   2 | SR1:  11 | SR2:  47 | SR3: 108 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  374 | PC:   3 | IR: load  | DR:  47 | SR1:  11 | SR2:  47 | SR3: 108 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  380 | PC:   4 | IR: load  | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:  11 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 100 | mode: normal
-  DEBUG:root:TICK:  384 | PC:   5 | IR: cmp   | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  386 | PC:   6 | IR: je    | DR:  44 | SR1:  11 | SR2:  47 | SR3: 100 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
-  DEBUG:root:TICK:  392 | PC:   7 | IR: load  | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:  11 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 100 | mode: normal
-  DEBUG:root:output_buffer: 'Hello, Worl' << 'd'
-  DEBUG:root:TICK:  397 | PC:   8 | IR: store | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 100 | mode: normal
-  DEBUG:root:TICK:  400 | PC:   9 | IR: inc   | DR: 111 | SR1:  12 | SR2:  47 | SR3: 100 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
-  DEBUG:root:TICK:  403 | PC:   2 | IR: jmp   | DR:   2 | SR1:  12 | SR2:  47 | SR3: 100 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
-  DEBUG:root:TICK:  407 | PC:   3 | IR: load  | DR:  47 | SR1:  12 | SR2:  47 | SR3: 100 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
-  DEBUG:root:TICK:  413 | PC:   4 | IR: load  | DR:  33 | SR1:  12 | SR2:  47 | SR3:  33 | AR:  12 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  33 | mode: normal
-  WARNING:root:Instruction limit exceeded!
-  INFO:root:output_buffer: 'Hello, World'
+  DEBUG   machine:decode_and_execute_instr TICK:    3 | PC:   1 | IR: jmp   | DR:   1 | SR1: None | SR2: None | SR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:    7 | PC:   2 | IR: load  | DR:   0 | SR1: None | SR2: None | SR3: None | AR:  14 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   11 | PC:   3 | IR: load  | DR:  47 | SR1: None | SR2:  47 | SR3: None | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   17 | PC:   4 | IR: load  | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   21 | PC:   5 | IR: cmp   | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   23 | PC:   6 | IR: je    | DR:  44 | SR1: None | SR2:  47 | SR3:  72 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   29 | PC:   7 | IR: load  | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal
+  DEBUG   machine:signal_output output_buffer: '' << 'H'
+  DEBUG   machine:decode_and_execute_instr TICK:   34 | PC:   8 | IR: store | DR:  72 | SR1: None | SR2:  47 | SR3:  72 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   37 | PC:   9 | IR: inc   | DR: 111 | SR1:   1 | SR2:  47 | SR3:  72 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   40 | PC:   2 | IR: jmp   | DR:   2 | SR1:   1 | SR2:  47 | SR3:  72 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   44 | PC:   3 | IR: load  | DR:  47 | SR1:   1 | SR2:  47 | SR3:  72 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   50 | PC:   4 | IR: load  | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 101 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   54 | PC:   5 | IR: cmp   | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   56 | PC:   6 | IR: je    | DR:  44 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   62 | PC:   7 | IR: load  | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 101 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'H' << 'e'
+  DEBUG   machine:decode_and_execute_instr TICK:   67 | PC:   8 | IR: store | DR: 101 | SR1:   1 | SR2:  47 | SR3: 101 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 101 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   70 | PC:   9 | IR: inc   | DR: 111 | SR1:   2 | SR2:  47 | SR3: 101 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   73 | PC:   2 | IR: jmp   | DR:   2 | SR1:   2 | SR2:  47 | SR3: 101 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   77 | PC:   3 | IR: load  | DR:  47 | SR1:   2 | SR2:  47 | SR3: 101 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   83 | PC:   4 | IR: load  | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   87 | PC:   5 | IR: cmp   | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   89 | PC:   6 | IR: je    | DR:  44 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   95 | PC:   7 | IR: load  | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'He' << 'l'
+  DEBUG   machine:decode_and_execute_instr TICK:  100 | PC:   8 | IR: store | DR: 108 | SR1:   2 | SR2:  47 | SR3: 108 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  103 | PC:   9 | IR: inc   | DR: 111 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  106 | PC:   2 | IR: jmp   | DR:   2 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  110 | PC:   3 | IR: load  | DR:  47 | SR1:   3 | SR2:  47 | SR3: 108 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  116 | PC:   4 | IR: load  | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  120 | PC:   5 | IR: cmp   | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  122 | PC:   6 | IR: je    | DR:  44 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  128 | PC:   7 | IR: load  | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hel' << 'l'
+  DEBUG   machine:decode_and_execute_instr TICK:  133 | PC:   8 | IR: store | DR: 108 | SR1:   3 | SR2:  47 | SR3: 108 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  136 | PC:   9 | IR: inc   | DR: 111 | SR1:   4 | SR2:  47 | SR3: 108 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  139 | PC:   2 | IR: jmp   | DR:   2 | SR1:   4 | SR2:  47 | SR3: 108 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  143 | PC:   3 | IR: load  | DR:  47 | SR1:   4 | SR2:  47 | SR3: 108 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  149 | PC:   4 | IR: load  | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  153 | PC:   5 | IR: cmp   | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  155 | PC:   6 | IR: je    | DR:  44 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  161 | PC:   7 | IR: load  | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hell' << 'o'
+  DEBUG   machine:decode_and_execute_instr TICK:  166 | PC:   8 | IR: store | DR: 111 | SR1:   4 | SR2:  47 | SR3: 111 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  169 | PC:   9 | IR: inc   | DR: 111 | SR1:   5 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  172 | PC:   2 | IR: jmp   | DR:   2 | SR1:   5 | SR2:  47 | SR3: 111 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  176 | PC:   3 | IR: load  | DR:  47 | SR1:   5 | SR2:  47 | SR3: 111 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  182 | PC:   4 | IR: load  | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  186 | PC:   5 | IR: cmp   | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  188 | PC:   6 | IR: je    | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  194 | PC:   7 | IR: load  | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hello' << ','
+  DEBUG   machine:decode_and_execute_instr TICK:  199 | PC:   8 | IR: store | DR:  44 | SR1:   5 | SR2:  47 | SR3:  44 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  202 | PC:   9 | IR: inc   | DR: 111 | SR1:   6 | SR2:  47 | SR3:  44 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  205 | PC:   2 | IR: jmp   | DR:   2 | SR1:   6 | SR2:  47 | SR3:  44 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  209 | PC:   3 | IR: load  | DR:  47 | SR1:   6 | SR2:  47 | SR3:  44 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  215 | PC:   4 | IR: load  | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  32 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  219 | PC:   5 | IR: cmp   | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  221 | PC:   6 | IR: je    | DR:  44 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  227 | PC:   7 | IR: load  | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  32 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hello,' << ' '
+  DEBUG   machine:decode_and_execute_instr TICK:  232 | PC:   8 | IR: store | DR:  32 | SR1:   6 | SR2:  47 | SR3:  32 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  32 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  235 | PC:   9 | IR: inc   | DR: 111 | SR1:   7 | SR2:  47 | SR3:  32 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  238 | PC:   2 | IR: jmp   | DR:   2 | SR1:   7 | SR2:  47 | SR3:  32 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  242 | PC:   3 | IR: load  | DR:  47 | SR1:   7 | SR2:  47 | SR3:  32 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  248 | PC:   4 | IR: load  | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  87 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  252 | PC:   5 | IR: cmp   | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  254 | PC:   6 | IR: je    | DR:  44 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  260 | PC:   7 | IR: load  | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  87 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hello, ' << 'W'
+  DEBUG   machine:decode_and_execute_instr TICK:  265 | PC:   8 | IR: store | DR:  87 | SR1:   7 | SR2:  47 | SR3:  87 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  87 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  268 | PC:   9 | IR: inc   | DR: 111 | SR1:   8 | SR2:  47 | SR3:  87 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  271 | PC:   2 | IR: jmp   | DR:   2 | SR1:   8 | SR2:  47 | SR3:  87 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  275 | PC:   3 | IR: load  | DR:  47 | SR1:   8 | SR2:  47 | SR3:  87 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  281 | PC:   4 | IR: load  | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  285 | PC:   5 | IR: cmp   | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  287 | PC:   6 | IR: je    | DR:  44 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  293 | PC:   7 | IR: load  | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hello, W' << 'o'
+  DEBUG   machine:decode_and_execute_instr TICK:  298 | PC:   8 | IR: store | DR: 111 | SR1:   8 | SR2:  47 | SR3: 111 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  301 | PC:   9 | IR: inc   | DR: 111 | SR1:   9 | SR2:  47 | SR3: 111 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  304 | PC:   2 | IR: jmp   | DR:   2 | SR1:   9 | SR2:  47 | SR3: 111 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  308 | PC:   3 | IR: load  | DR:  47 | SR1:   9 | SR2:  47 | SR3: 111 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  314 | PC:   4 | IR: load  | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  318 | PC:   5 | IR: cmp   | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  320 | PC:   6 | IR: je    | DR:  44 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  326 | PC:   7 | IR: load  | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hello, Wo' << 'r'
+  DEBUG   machine:decode_and_execute_instr TICK:  331 | PC:   8 | IR: store | DR: 114 | SR1:   9 | SR2:  47 | SR3: 114 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  334 | PC:   9 | IR: inc   | DR: 111 | SR1:  10 | SR2:  47 | SR3: 114 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  337 | PC:   2 | IR: jmp   | DR:   2 | SR1:  10 | SR2:  47 | SR3: 114 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  341 | PC:   3 | IR: load  | DR:  47 | SR1:  10 | SR2:  47 | SR3: 114 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  347 | PC:   4 | IR: load  | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:  10 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  351 | PC:   5 | IR: cmp   | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  353 | PC:   6 | IR: je    | DR:  44 | SR1:  10 | SR2:  47 | SR3: 108 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  359 | PC:   7 | IR: load  | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:  10 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hello, Wor' << 'l'
+  DEBUG   machine:decode_and_execute_instr TICK:  364 | PC:   8 | IR: store | DR: 108 | SR1:  10 | SR2:  47 | SR3: 108 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 108 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  367 | PC:   9 | IR: inc   | DR: 111 | SR1:  11 | SR2:  47 | SR3: 108 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  370 | PC:   2 | IR: jmp   | DR:   2 | SR1:  11 | SR2:  47 | SR3: 108 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  374 | PC:   3 | IR: load  | DR:  47 | SR1:  11 | SR2:  47 | SR3: 108 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  380 | PC:   4 | IR: load  | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:  11 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 100 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  384 | PC:   5 | IR: cmp   | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:   4 | N: 1 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  386 | PC:   6 | IR: je    | DR:  44 | SR1:  11 | SR2:  47 | SR3: 100 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  44 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  392 | PC:   7 | IR: load  | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:  11 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 100 | mode: normal
+  DEBUG   machine:signal_output output_buffer: 'Hello, Worl' << 'd'
+  DEBUG   machine:decode_and_execute_instr TICK:  397 | PC:   8 | IR: store | DR: 100 | SR1:  11 | SR2:  47 | SR3: 100 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 100 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  400 | PC:   9 | IR: inc   | DR: 111 | SR1:  12 | SR2:  47 | SR3: 100 | AR:   8 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 111 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  403 | PC:   2 | IR: jmp   | DR:   2 | SR1:  12 | SR2:  47 | SR3: 100 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  407 | PC:   3 | IR: load  | DR:  47 | SR1:  12 | SR2:  47 | SR3: 100 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  413 | PC:   4 | IR: load  | DR:  33 | SR1:  12 | SR2:  47 | SR3:  33 | AR:  12 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  33 | mode: normal
+  WARNING machine:simulation    Instruction limit exceeded!
+  INFO    machine:simulation    output_buffer: 'Hello, World'
