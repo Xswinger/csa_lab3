@@ -286,7 +286,7 @@ class ControlUnit:
             self.inc_tick()
 
         elif code['opcode'] == Opcode.ADDI:
-            self.data_path.signal_execute_alu_op(ALUOpcode.INC_B, right_sel=Selectors.FROM_SR_1)
+            self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_SR_1)
             self.data_path.signal_latch_sr(Selectors.FROM_ALU, code['arg1'])
             self.inc_tick()
 
