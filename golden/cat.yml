@@ -155,7 +155,7 @@ out_stdout: |
   ITMO
   
   instr_counter:  55 ticks: 228
-out_log: |-
+out_log: |
   DEBUG   machine:decode_and_execute_instr TICK:    3 | PC:  10 | IR: jmp   | DR:  10 | SR1: None | SR2: None | SR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  98 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:    6 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2: None | SR3: None | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   WARNING machine:decode_and_execute_instr Entering into interruption...
@@ -226,5 +226,4 @@ out_log: |-
   DEBUG   machine:decode_and_execute_instr TICK:  220 | PC:  12 | IR: load  | DR:  11 | SR1:  11 | SR2:  11 | SR3:  10 | AR:   2 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:  11 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:  224 | PC:  13 | IR: cmp   | DR:  11 | SR1:  11 | SR2:  11 | SR3:  10 | AR:  12 | N: 1 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:  226 | PC:  14 | IR: je    | DR:   0 | SR1:  11 | SR2:  11 | SR3:  10 | AR:  13 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
-  INFO    machine:simulation    output_buffer: 'ITMO\n'
-  
+  INFO    machine:simulation    output_buffer: 'ITMO'
