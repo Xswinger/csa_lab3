@@ -16,7 +16,6 @@ class DataPath:
     data_memory_size = None
 
     data_memory = None
-    # память данных
 
     instr_memory_size = None
 
