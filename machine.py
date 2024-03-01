@@ -418,7 +418,7 @@ class ControlUnit:
         self.data_path.signal_latch_dr()
         self.inc_tick()
 
-    def decode_and_execute_instr(self):
+    def decode_and_execute_instr(self) -> None:
         self.instr_fetch()
         self.execute()
 

@@ -12,25 +12,25 @@ class ProgramMode(str, Enum):
 
 class Opcode(str, Enum):
     NOP = "nop"
-
     HALT = "halt"
+
     EI = "ei"
     DI = "di"
     IRET = "iret"
 
     LOAD = "load"
     STORE = "store"
+
     ADD = "add"
     ADDI = "addi"
+
     CMP = "cmp"
-    TEST = "test"
 
     INC = "inc"
     DEC = "dec"
 
     JNE = "jne"
     JE = "je"
-
     JMP = "jmp"
 
     def __str__(self):
