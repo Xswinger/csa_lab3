@@ -1,6 +1,9 @@
+
 # Лабораторная работа №3 (Упрощенный вариант)
+
 ## Студент
 Аллаяров Игорь Олегович, P33121
+
 ## Вариант
 asm | risc | harv | hw | instr | struct | stream | mem | cstr | prob2 | 8bit
 
@@ -41,7 +44,7 @@ cstr -- Null-terminated (C string)
 
 ### Форма Бэкуса-Наура
 
-```
+```ebnf
 <program> ::= <code_line>
 <code_line> ::= <data_definition> | <label_definition> | <directive>
 <data_definition> ::= <label> ":\n" <data>
@@ -66,7 +69,6 @@ cstr -- Null-terminated (C string)
     * Инструкции имеют несколько форматов (rrr, rri, ri, i)
     * Все инструкции имеют одинаковый размер 
 
-
 ### Описание семантики
 
 * Глобальная видимость данных
@@ -83,7 +85,7 @@ cstr -- Null-terminated (C string)
 
 Память команд
 
-```
+```text
 +-----------------------------+
 | 00       jmp N              | <-- PC
 | 01       interrupt handle   |
@@ -99,7 +101,7 @@ cstr -- Null-terminated (C string)
 
 Память данных
 
-```
+```text
 +-----------------------------+
 | 00       string literals    | <-- AR
 |          and variables      | 
@@ -117,6 +119,7 @@ cstr -- Null-terminated (C string)
 * Адрес 99 зарезервирован для вывода
 
 ## Система команд
+
 ### Особенности процессора
 
 * Длина машинного слова не определена (слова знаковые)
@@ -151,7 +154,7 @@ cstr -- Null-terminated (C string)
 
 Кодирование происходит в формат JSON, инструкция имеет вид:
 
-```
+```text
 {
     "index": 0,
     "opcode": add,
@@ -171,6 +174,7 @@ cstr -- Null-terminated (C string)
 * `is_indirect` - способ адресации (косвенная или прямая)
 
 ## Транслятор
+
 ### Интерфейс командной строки
 
 `translator.py <input_file> <prog_file> <data_file>`
@@ -191,6 +195,7 @@ cstr -- Null-terminated (C string)
 4) Кодирование инструкций в машинный код
 
 ## Модель процессора
+
 ### Интерфейс командной строки
 
 `machine.py <code_file> <memory_file> [<input_file>]`
@@ -206,6 +211,7 @@ cstr -- Null-terminated (C string)
 ![ControlUnit](/img/CSA3LabCU.png)
 
 ## Тестирование
+
 ### Разработанные тесты
 
 * `hello` - напечатать "Hello world"
@@ -218,5 +224,3 @@ cstr -- Null-terminated (C string)
 ### Описание работы CI
 
 CI при помощи Github Action:
-
-
