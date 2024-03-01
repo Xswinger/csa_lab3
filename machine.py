@@ -162,8 +162,8 @@ class DataPath:
             else:
                 src_b = self.pc
 
-        self.alu.set_details(src_a, src_b, operation)
-        self.alu.calc()
+        self.alu.prepare_exec(src_a, src_b, operation)
+        self.alu.exec()
 
 
 class ControlUnit:

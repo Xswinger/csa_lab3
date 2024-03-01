@@ -46,7 +46,7 @@ class ALU:
         self.result = 0
         self.operation = None
 
-    def calc(self):
+    def exec(self):
         tmp_result = None
         if self.operation == ALUOpcode.ADD:
             self.result = self.src_a + self.src_b
@@ -78,7 +78,7 @@ class ALU:
             self.n_flag = tmp_result < 0
             self.z_flag = tmp_result == 0
 
-    def set_details(self, src_a, src_b, operation: ALUOpcode):
+    def prepare_exec(self, src_a, src_b, operation: ALUOpcode):
         assert operation in self.operations, f"Unknown ALU operation: {operation}"
         self.src_a = src_a
         self.src_b = src_b
