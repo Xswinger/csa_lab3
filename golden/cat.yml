@@ -226,4 +226,4 @@ out_log: |
   DEBUG   machine:decode_and_execute_instr TICK:  220 | PC:  12 | IR: load  | DR:  11 | SR1:  11 | SR2:  11 | SR3:  10 | AR:   2 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:  11 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:  224 | PC:  13 | IR: cmp   | DR:  11 | SR1:  11 | SR2:  11 | SR3:  10 | AR:  12 | N: 1 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:  226 | PC:  14 | IR: je    | DR:   0 | SR1:  11 | SR2:  11 | SR3:  10 | AR:  13 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
-  INFO    machine:simulation    output_buffer: 'ITMO'
+  INFO    machine:simulation    output_buffer: 'ITMO\n'

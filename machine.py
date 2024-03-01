@@ -19,10 +19,8 @@ class DataPath:
     # память данных
 
     instr_memory_size = None
-    # размер памяти инструкций
 
     instr_memory = None
-    # память инструкций
 
     ar = None
     # регистр адреса в памяти
