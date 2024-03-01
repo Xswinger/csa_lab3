@@ -21,7 +21,6 @@ def command_to_opcode(symbol):
         "add": Opcode.ADD,
         "addi": Opcode.ADDI,
         "cmp": Opcode.CMP,
-        "test": Opcode.TEST,
         "jne": Opcode.JNE,
         "je": Opcode.JE,
         "jmp": Opcode.JMP,
