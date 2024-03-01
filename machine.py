@@ -23,26 +23,24 @@ class DataPath:
 
     instr_memory = None
 
-    ar = None
     # регистр адреса в памяти
+    ar = None
 
     pc = None
 
     dr = None
-    # регистр данных (хранение промеж. данных)
 
     ir = None
 
-    out_add = None
     in_add = None
+    out_add = None
 
+    # временные регистры
     sr1 = None
     sr2 = None
     sr3 = None
-    # saved регистры
 
     ps = None
-    # регистр статуса программы
 
     alu = None
 
@@ -77,40 +75,31 @@ class DataPath:
             self.instr_memory[index] = com_cell
         self.data_memory = mem
 
-    # установить регистр адреса памяти данных
     def signal_latch_ar(self):
         self.ar = self.alu.result
 
-    # установить данные для записи в память данных
-    def signal_latch_dr_direct(self):
-        self.dr = self.alu.result
-
-    # установить текущую инструкцию по регистру адреса в памяти
     def signal_latch_ir(self):
         assert self.pc >= 0, "Address below memory limit"
         assert self.pc <= self.instr_memory_size, "Address above memory limit"
         self.ir = self.instr_memory[self.pc]
 
-    # установить промежуточные данные по регистру адреса в памяти
+    # установить промежуточные данные по выходу АЛУ
+    def signal_latch_dr_direct(self):
+        self.dr = self.alu.result
+
+    # установить промежуточные данные по ячейке в памяти
     def signal_latch_dr(self):
         assert self.ar >= 0, "Address below memory limit"
         assert self.ar <= self.data_memory_size, "Address above memory limit"
         self.dr = self.data_memory[self.ar]
 
-    # установить следующую команду
     def signal_latch_pc(self):
-        self.pc = self.alu.result % self.instr_memory_size
+        self.pc = self.alu.result
 
-    # установить флаги состояния по флагам алу
+    # установить флаги состояния по флагам АЛУ
     def signal_latch_ps_flags(self):
         self.ps["N"] = self.alu.n_flag
         self.ps["Z"] = self.alu.z_flag
-
-    # установить флаги состояния алу по результату
-    def signal_latch_ps(self):
-        self.alu.n_flag = True if int(self.alu.result / 100) == 1 else False
-        self.alu.z_flag = True if int((self.alu.result / 10) % 10) == 1 else False
-        self.ps["INT_EN"] = True if self.alu.result % 10 == 1 else False
 
     def signal_enable_interrupts(self):
         self.ps["INT_EN"] = True
@@ -118,6 +107,7 @@ class DataPath:
     def signal_disable_interrupts(self):
         self.ps["INT_EN"] = False
 
+    # установка временных регистров (по результату АЛУ или из буфера ввода)
     def signal_latch_sr(self, sel: Selectors, reg_name: str):
         assert sel in {Selectors.FROM_INPUT, Selectors.FROM_ALU}, f"Unknown selector '{sel}'"
         if sel == Selectors.FROM_ALU:
@@ -138,15 +128,15 @@ class DataPath:
                 self.sr3 = symbol_code
             logging.debug("input: %s", repr(symbol))
 
-    def signal_output(self):
-        symbol = chr(self.data_memory[self.out_add])
-        logging.debug("output_buffer: %s << %s", repr("".join(self.output_buffer)), repr(symbol))
-        self.output_buffer.append(symbol)
-
     def signal_wr(self):
         self.data_memory[self.ar] = self.alu.result
         if self.ar == self.out_add:
             self.signal_output()
+
+    def signal_output(self):
+        symbol = chr(self.data_memory[self.out_add])
+        logging.debug("output_buffer: %s << %s", repr("".join(self.output_buffer)), repr(symbol))
+        self.output_buffer.append(symbol)
 
     def signal_execute_alu_op(self, operation, left_sel: Selectors = None, right_sel: Selectors = None):
         src_a = None
@@ -157,19 +147,13 @@ class DataPath:
                 Selectors.FROM_SR_1,
                 Selectors.FROM_SR_2,
                 Selectors.FROM_SR_3,
-                Selectors.FROM_PS,
             }, f"Unknown left selector '{right_sel}'"
             if left_sel == Selectors.FROM_SR_1:
                 src_a = self.sr1
             elif left_sel == Selectors.FROM_SR_2:
                 src_a = self.sr2
-            elif left_sel == Selectors.FROM_SR_3:
-                src_a = self.sr3
             else:
-                n = 1 if self.ps["N"] else 0
-                z = 1 if self.ps["Z"] else 0
-                int_en = 1 if self.ps["INT_EN"] else 0
-                src_a = n * 100 + z * 10 + int_en
+                src_a = self.sr3
 
         if right_sel is not None:
             assert right_sel in {Selectors.FROM_DR, Selectors.FROM_PC}, f"Unknown right selector '{right_sel}'"
@@ -204,7 +188,6 @@ class ControlUnit:
     def cur_tick(self) -> int:
         return self._tick
 
-    # выполнить команду
     def execute(self):
         ir, ps = self.data_path.ir, self.data_path.ps
         opcode = ir["opcode"]
@@ -400,7 +383,7 @@ class ControlUnit:
 
     def go_to_interrupt(self):
         self.data_path.dr = 97
-        #  Сохраняем на стеке PS и PC
+        #  сохранение pc в память
         self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
         self.data_path.signal_latch_ar()
         self.inc_tick()
@@ -408,7 +391,7 @@ class ControlUnit:
         self.data_path.signal_latch_dr_direct()
         self.data_path.signal_wr()
         self.inc_tick()
-        #  Перемещаем в PC адрес подпрограммы обработки прерывания
+        #  запись в pc адреса обработчика прерывания
         self.data_path.dr = 1
         self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
         self.data_path.signal_latch_pc()

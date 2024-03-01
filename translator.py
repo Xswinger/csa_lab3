@@ -7,7 +7,6 @@ from isa import Opcode, write_code, write_memory
 data = [0] * 100
 
 
-
 def command_to_opcode(symbol):
     return {
         "nop": Opcode.NOP,
@@ -115,6 +114,7 @@ def link_labels(words, labels) -> dict:
         word.append(indirect)
         replaced[w_index] = word
     return replaced
+
 
 # Нахождение метки начала программы для корректного стартового jmp
 def find_program_start(labels) -> int:
