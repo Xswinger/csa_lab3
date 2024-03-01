@@ -1,3 +1,32 @@
-path = "./input/hello.txt"
-greetings = rd(path)
-prnt(greetings)
+_interrupt:
+    di
+    load sr3 (in_port)
+    store sr3 (out_port)
+    cmp sr3 line_feed
+    jne _returning
+    load sr2 flag
+    inc sr2
+    store sr2 flag
+    _returning:
+        iret
+
+intr:
+    .word _interrupt
+in_port:
+    .word 98
+out_port:
+    .word 99
+flag:
+    .word 0
+zero_flag:
+    .word 1
+line_feed:
+    .word 10
+
+_start:
+    ei
+    _spin_loop:
+        load sr1 flag
+        cmp sr1 zero_flag
+        je _spin_loop
+    halt

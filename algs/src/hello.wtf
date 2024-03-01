@@ -1,1 +1,22 @@
-prnt("hello world\n")
+message:
+    .word 'Hello, World!/'
+pointer:
+    .word message
+null_symb:
+    .word '/'
+out_port:
+    .word 99
+
+_start:
+    load sr1 pointer
+    load sr2 null_symb
+    _loop:
+        load sr3 (sr1)
+        cmp sr3 sr2
+        je _end
+        load sr3 (sr1)
+        store sr3 (out_port)
+        inc sr1
+        jmp _loop
+    _end:
+        halt

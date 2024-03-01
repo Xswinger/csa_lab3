@@ -1,0 +1,216 @@
+maybe need to change root on machine (see manu example)
+in_source: |-
+  _interrupt:
+    di
+    load sr3 (in_port)
+    store sr3 (out_port)
+    cmp sr3 line_feed
+    jne _returning
+    load sr2 flag
+    inc sr2
+    store sr2 flag
+    _returning:
+        iret
+
+  intr:
+    .word _interrupt
+  in_port:
+    .word 98
+  out_port:
+    .word 99
+  flag:
+    .word 0
+  zero_flag:
+    .word 1
+  line_feed:
+    .word 10
+
+  _start:
+    ei
+      _spin_loop:
+        load sr1 flag
+        cmp sr1 zero_flag
+        je _spin_loop
+    halt
+in_stdin: |
+  ITMO
+out_code: |-
+  [{"index": 0, "opcode": "jmp", "arg1": 10, "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 1, "opcode": "di", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 2, "opcode": "load", "arg1": "sr3", "arg2": 0, "arg3": 0, "is_indirect": true},
+   {"index": 3, "opcode": "store", "arg1": "sr3", "arg2": 1, "arg3": 0, "is_indirect": true},
+   {"index": 4, "opcode": "cmp", "arg1": "sr3", "arg2": 4, "arg3": 0, "is_indirect": false},
+   {"index": 5, "opcode": "jne", "arg1": 8, "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 6, "opcode": "load", "arg1": "sr2", "arg2": 2, "arg3": 0, "is_indirect": false},
+   {"index": 7, "opcode": "inc", "arg1": "sr2", "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 8, "opcode": "store", "arg1": "sr2", "arg2": 2, "arg3": 0, "is_indirect": false},
+   {"index": 9, "opcode": "iret", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 10, "opcode": "ei", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 11, "opcode": "load", "arg1": "sr1", "arg2": 2, "arg3": 0, "is_indirect": false},
+   {"index": 12, "opcode": "cmp", "arg1": "sr1", "arg2": 3, "arg3": 0, "is_indirect": false},
+   {"index": 13, "opcode": "je", "arg1": 10, "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 14, "opcode": "halt", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false}]
+out_mem: |
+  [98,
+  99,
+  0,
+  1,
+  10,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0]
+out_stdout: |
+  ITMO
+  instr_counter:  45 ticks: 186
+
+out_log: |
+  DEBUG:root:TICK:    3 | PC:  10 | IR: jmp   | DR:  10 | SR1: None | SR2: None | SR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  98 | mode: normal
+  DEBUG:root:TICK:    6 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2: None | SR3: None | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  WARNING:root:Entering into interruption...
+  DEBUG:root:TICK:   12 | PC:   2 | IR: di    | DR:  99 | SR1: None | SR2: None | SR3: None | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  99 | mode: interrupt
+  DEBUG:root:input: 'I'
+  DEBUG:root:TICK:   18 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2: None | SR3:  73 | AR:  98 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:output_buffer: '' << 'I'
+  DEBUG:root:TICK:   23 | PC:   4 | IR: store | DR:  73 | SR1: None | SR2: None | SR3:  73 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  73 | mode: interrupt
+  DEBUG:root:TICK:   27 | PC:   5 | IR: cmp   | DR:  73 | SR1: None | SR2: None | SR3:  73 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
+  DEBUG:root:TICK:   29 | PC:   6 | IR: jne   | DR:   0 | SR1: None | SR2: None | SR3:  73 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:   33 | PC:   7 | IR: load  | DR:   0 | SR1: None | SR2: None | SR3:  73 | AR:   2 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:   36 | PC:   8 | IR: inc   | DR:   0 | SR1: None | SR2:  74 | SR3:  73 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:   39 | PC:   9 | IR: store | DR:  74 | SR1: None | SR2:  74 | SR3:  73 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  74 | mode: interrupt
+  DEBUG:root:TICK:   45 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  74 | SR3:  73 | AR:  97 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG:root:TICK:   48 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  74 | SR3:  73 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  WARNING:root:Entering into interruption...
+  DEBUG:root:TICK:   54 | PC:   2 | IR: di    | DR:  99 | SR1: None | SR2:  74 | SR3:  73 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  99 | mode: interrupt
+  DEBUG:root:input: 'T'
+  DEBUG:root:TICK:   60 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  74 | SR3:  84 | AR:  98 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:output_buffer: 'I' << 'T'
+  DEBUG:root:TICK:   65 | PC:   4 | IR: store | DR:  84 | SR1: None | SR2:  74 | SR3:  84 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  84 | mode: interrupt
+  DEBUG:root:TICK:   69 | PC:   5 | IR: cmp   | DR:  84 | SR1: None | SR2:  74 | SR3:  84 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
+  DEBUG:root:TICK:   71 | PC:   6 | IR: jne   | DR:   0 | SR1: None | SR2:  74 | SR3:  84 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:   75 | PC:   7 | IR: load  | DR:  74 | SR1: None | SR2:  74 | SR3:  84 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  74 | mode: interrupt
+  DEBUG:root:TICK:   78 | PC:   8 | IR: inc   | DR:   0 | SR1: None | SR2:  85 | SR3:  84 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:   81 | PC:   9 | IR: store | DR:  85 | SR1: None | SR2:  85 | SR3:  84 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  85 | mode: interrupt
+  DEBUG:root:TICK:   87 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  85 | SR3:  84 | AR:  97 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG:root:TICK:   90 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  85 | SR3:  84 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  WARNING:root:Entering into interruption...
+  DEBUG:root:TICK:   96 | PC:   2 | IR: di    | DR:  99 | SR1: None | SR2:  85 | SR3:  84 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  99 | mode: interrupt
+  DEBUG:root:input: 'M'
+  DEBUG:root:TICK:  102 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  85 | SR3:  77 | AR:  98 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:output_buffer: 'IT' << 'M'
+  DEBUG:root:TICK:  107 | PC:   4 | IR: store | DR:  77 | SR1: None | SR2:  85 | SR3:  77 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  77 | mode: interrupt
+  DEBUG:root:TICK:  111 | PC:   5 | IR: cmp   | DR:  77 | SR1: None | SR2:  85 | SR3:  77 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
+  DEBUG:root:TICK:  113 | PC:   6 | IR: jne   | DR:   0 | SR1: None | SR2:  85 | SR3:  77 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:  117 | PC:   7 | IR: load  | DR:  85 | SR1: None | SR2:  85 | SR3:  77 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  85 | mode: interrupt
+  DEBUG:root:TICK:  120 | PC:   8 | IR: inc   | DR:   0 | SR1: None | SR2:  78 | SR3:  77 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:  123 | PC:   9 | IR: store | DR:  78 | SR1: None | SR2:  78 | SR3:  77 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  78 | mode: interrupt
+  DEBUG:root:TICK:  129 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  78 | SR3:  77 | AR:  97 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG:root:TICK:  132 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  78 | SR3:  77 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  WARNING:root:Entering into interruption...
+  DEBUG:root:TICK:  138 | PC:   2 | IR: di    | DR:  99 | SR1: None | SR2:  78 | SR3:  77 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  99 | mode: interrupt
+  DEBUG:root:input: 'O'
+  DEBUG:root:TICK:  144 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  78 | SR3:  79 | AR:  98 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:output_buffer: 'ITM' << 'O'
+  DEBUG:root:TICK:  149 | PC:   4 | IR: store | DR:  79 | SR1: None | SR2:  78 | SR3:  79 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  79 | mode: interrupt
+  DEBUG:root:TICK:  153 | PC:   5 | IR: cmp   | DR:  79 | SR1: None | SR2:  78 | SR3:  79 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
+  DEBUG:root:TICK:  155 | PC:   6 | IR: jne   | DR:   0 | SR1: None | SR2:  78 | SR3:  79 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:  159 | PC:   7 | IR: load  | DR:  78 | SR1: None | SR2:  78 | SR3:  79 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  78 | mode: interrupt
+  DEBUG:root:TICK:  162 | PC:   8 | IR: inc   | DR:   0 | SR1: None | SR2:  80 | SR3:  79 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG:root:TICK:  165 | PC:   9 | IR: store | DR:  80 | SR1: None | SR2:  80 | SR3:  79 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  80 | mode: interrupt
+  DEBUG:root:TICK:  171 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  80 | SR3:  79 | AR:  97 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG:root:TICK:  174 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  80 | SR3:  79 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG:root:TICK:  178 | PC:  12 | IR: load  | DR:  80 | SR1:  80 | SR2:  80 | SR3:  79 | AR:   2 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:  80 | mode: normal
+  DEBUG:root:TICK:  182 | PC:  13 | IR: cmp   | DR:  80 | SR1:  80 | SR2:  80 | SR3:  79 | AR:  12 | N: 1 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG:root:TICK:  184 | PC:  14 | IR: je    | DR:   0 | SR1:  80 | SR2:  80 | SR3:  79 | AR:  13 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  INFO:root:output_buffer: 'ITMO'
