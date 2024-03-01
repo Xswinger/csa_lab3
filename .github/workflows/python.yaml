@@ -3,13 +3,13 @@ name: Python CI
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - ".github/workflows/*"
       - "**/*.py"
   pull_request:
     branches:
-      - main
+      - master
     paths:
       - ".github/workflows/*"
       - "**/*.py"
