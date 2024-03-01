@@ -139,7 +139,7 @@ out_stdout: |
   source LoC: 22 code instr: 11
   Hello, World
   instr_counter:  100 ticks: 413
-out_log: |-
+out_log: |
   DEBUG   machine:decode_and_execute_instr TICK:    3 | PC:   1 | IR: jmp   | DR:   1 | SR1: None | SR2: None | SR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  72 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:    7 | PC:   2 | IR: load  | DR:   0 | SR1: None | SR2: None | SR3: None | AR:  14 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:   11 | PC:   3 | IR: load  | DR:  47 | SR1: None | SR2:  47 | SR3: None | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal

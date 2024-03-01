@@ -153,6 +153,7 @@ out_mem: |-
 out_stdout: |
   source LoC: 32 code instr: 15
   ITMO
+  
   instr_counter:  55 ticks: 228
 out_log: |
   DEBUG   machine:decode_and_execute_instr TICK:    3 | PC:  10 | IR: jmp   | DR:  10 | SR1: None | SR2: None | SR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  98 | mode: normal
