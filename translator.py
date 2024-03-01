@@ -1,5 +1,8 @@
-from isa import Opcode, write_code, write_memory
+from __future__ import annotations
+
 import sys
+
+from isa import Opcode, write_code, write_memory
 
 data = [0] * 100
 
@@ -102,13 +105,12 @@ def parse_word(position, memory_position, word_line, words, labels) -> tuple[int
 def link_labels(words, labels) -> dict:
     replaced = {}
     for w_index, word in words.items():
-        new_word = []
         indirect = False
         for part in range(0, len(word)):
             if isinstance(word[part], str) and word[part].startswith("("):
                 indirect = True
                 word[part] = word[part][1:-1]
-            if labels.get(word[part]) != None:
+            if labels.get(word[part]) is not None:
                 if labels[word[part]][0] != -1:
                     word[part] = int(labels[word[part]][0])
                 else:
@@ -132,7 +134,6 @@ def find_program_start(labels) -> int:
 # трансляция в машинный код
 def to_machine_code(raw_code, _start_position) -> list:
     code = [{"index": 0, "opcode": Opcode.JMP, "arg1": _start_position, "arg2": 0, "arg3": 0, "is_indirect": False}]
-    # code = []
     for index, word in raw_code.items():
         if len(word) == 2:
             instr = {

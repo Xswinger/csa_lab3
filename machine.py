@@ -1,10 +1,11 @@
-import sys
-import logging
-import json
+from __future__ import annotations
 
-from typing import Optional
-from isa import Opcode, Selectors, rrr_format_instr, rri_format_instr, ri_format_instr, ProgramMode
+import json
+import logging
+import sys
+
 from alu import ALU, ALUOpcode
+from isa import Opcode, ProgramMode, Selectors, ri_format_instr, rri_format_instr, rrr_format_instr
 
 
 class HaltError(Exception):
@@ -341,14 +342,6 @@ class ControlUnit:
 
             self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
-        # elif code['opcode'] == Opcode.LOADI:
-        #     self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
-        #     self.data_path.signal_latch_dr()
-        #     self.inc_tick()
-
-        #     self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
-        #     self.data_path.signal_latch_sr(Selectors.FROM_ALU, code['arg1'])
-        #     self.inc_tick()
         elif code["opcode"] == Opcode.DEC:
             if code["arg1"] == "sr1":
                 self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_SR_1)
@@ -380,24 +373,11 @@ class ControlUnit:
             self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
             self.data_path.signal_latch_ar()
             self.inc_tick()
-            # self.data_path.signal_execute_alu_op(ALUOpcode.INC_B, right_sel=Selectors.FROM_SP)
-            # self.data_path.signal_latch_sp()
             self.data_path.signal_latch_dr()
             self.inc_tick()
             self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
             self.data_path.signal_latch_pc()
             self.inc_tick()
-            #  Восстанавливаем PS
-            # self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_SP)
-            # self.data_path.signal_latch_ar()
-            # self.inc_tick()
-            # self.data_path.signal_execute_alu_op(ALUOpcode.INC_B, right_sel=Selectors.FROM_SP)
-            # self.data_path.signal_latch_sp()
-            # self.data_path.signal_latch_dr()
-            # self.inc_tick()
-            # self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
-            # self.data_path.signal_latch_ps()
-            # self.inc_tick()
             self.mode = ProgramMode.NORMAL
             self.inc_tick()
         elif code["opcode"] == Opcode.JNE:
@@ -428,18 +408,8 @@ class ControlUnit:
         self.data_path.signal_latch_dr_direct()
         self.data_path.signal_wr()
         self.inc_tick()
-        # self.data_path.signal_execute_alu_op(ALUOpcode.DEC_B, right_sel=Selectors.FROM_SP)
-        # self.data_path.signal_latch_ar()
-        # self.inc_tick()
-        # self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_PC)
-        # self.data_path.signal_wr()
-        # self.inc_tick()
         #  Перемещаем в PC адрес подпрограммы обработки прерывания
         self.data_path.dr = 1
-        # self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
-        # self.data_path.signal_latch_ar()
-        # self.inc_tick()
-        # self.data_path.signal_latch_dr()
         self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
         self.data_path.signal_latch_pc()
         self.inc_tick()
@@ -449,8 +419,7 @@ class ControlUnit:
         self.data_path.input_buffer = self.data_path.input_buffer[0 if position == 0 else position - 1 :]
         if not enabled or not self.data_path.input_buffer:
             return False
-        else:
-            return True
+        return True
 
     def instr_fetch(self):
         self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_PC)
@@ -523,7 +492,7 @@ def read_code(filename):
         return json.loads(file.read())
 
 
-def main(code_file: str, memory_file: str, input_file: Optional[str]):
+def main(code_file: str, memory_file: str, input_file: str | None = None):
     code = read_code(code_file)
     memory = read_code(memory_file)
 

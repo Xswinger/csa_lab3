@@ -1,5 +1,5 @@
-from enum import Enum
 import json
+from enum import Enum
 
 
 class ProgramMode(str, Enum):
@@ -32,10 +32,6 @@ class Opcode(str, Enum):
     JE = "je"
 
     JMP = "jmp"
-
-    # новые команды
-    # загрузить число в регистр
-    # LOADI = "loadi"
 
     def __str__(self):
         return str(self.value)
@@ -73,7 +69,7 @@ def write_memory(filename: str, memory: list):
     with open(filename, "w", encoding="utf-8") as file:
         buf = []
         for ceil in memory:
-            if type(ceil) is list:
+            if isinstance(ceil, list):
                 buf.append(str(ceil[0]))
             else:
                 buf.append(str(ceil))
