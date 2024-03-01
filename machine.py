@@ -47,9 +47,6 @@ class DataPath:
     ps = None
     # регистр статуса программы
 
-    zero = None
-    # нулевой регистр
-
     alu = None
     # АЛУ
 
@@ -75,7 +72,6 @@ class DataPath:
         self.ir = 0
 
         self.ps = {"N": self.alu.n_flag, "Z": self.alu.z_flag, "INT_EN": False}
-        self.zero = 0
         self.input_buffer = input_buffer
         self.output_buffer = []
 
