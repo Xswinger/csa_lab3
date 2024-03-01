@@ -53,7 +53,6 @@ class DataPath:
     input_buffer = None
 
     output_buffer = None
-    # буфер выходных данных
 
     def __init__(self, data_memory_size: int, instr_memory_size: int, input_buffer: list):
         self.alu = ALU()
