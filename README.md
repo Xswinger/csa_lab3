@@ -232,6 +232,7 @@ cstr -- Null-terminated (C string)
 ### Описание работы CI
 
 CI при помощи Github Action:
+
 ```text
 name: Python CI
 
