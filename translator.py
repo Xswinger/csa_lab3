@@ -43,7 +43,7 @@ def read_lines(source_filename: str) -> tuple[list[str], int]:
 # строки кода в инструкции и метки
 def lines_to_words_and_labels(code_lines) -> tuple[dict, dict]:
     labels = {}
-    words = {}
+    prog_line = {}
     position = 0
     memory_position = 0
     for line in code_lines:
@@ -53,19 +53,19 @@ def lines_to_words_and_labels(code_lines) -> tuple[dict, dict]:
             else:
                 labels[line[0:-1]] = [-1, position]
         elif line.startswith(".word"):
-            position, memory_position, words = parse_word(position, memory_position, line[6:], words, labels)
+            position, memory_position, prog_line = handle_word(position, memory_position, line[6:], prog_line, labels)
         else:
             args = line.split(" ")
-            kv = [args[0]]
+            command_name = [args[0]]
             for i in range(1, len(args)):
-                kv.append(args[i])
-            words[position] = kv
+                command_name.append(args[i])
+            prog_line[position] = command_name
             position += 1
-    return words, labels
+    return prog_line, labels
 
 
-# Индексация слова данных (в т.ч. разбиение строк по буквам)
-def parse_word(position, memory_position, word_line, words, labels) -> tuple[int, dict]:
+# обработка слова данных (разбиение по буквам, установка индекса записи в памяти, запись в память)
+def handle_word(position, memory_position, word_line, words, labels) -> tuple[int, dict]:
     char_num = 0
     while char_num < len(word_line):
         if word_line[char_num] == "'":
@@ -96,7 +96,7 @@ def parse_word(position, memory_position, word_line, words, labels) -> tuple[int
     return position, memory_position, words
 
 
-# Подмена меток на индексы + установка вида адресации (True - косвенный)
+# подмена меток на индексы + установка вида адресации (True - косвенный)
 def link_labels(words, labels) -> dict:
     replaced = {}
     for w_index, word in words.items():
@@ -115,15 +115,15 @@ def link_labels(words, labels) -> dict:
     return replaced
 
 
-# Нахождение метки начала программы для корректного стартового jmp
-def find_program_start(labels) -> int:
+# нахождение метки начала программы для корректного стартового jmp
+def find_start(labels) -> int:
     counter = 0
     position = None
     for index, label in labels.items():
         if index == "_start":
             counter += 1
             position = label[1]
-    assert counter == 1, f"Error: got _start label {counter} times"
+    assert counter == 1, f"Error: got more _start label than 1 ({counter} times)"
     return position + 1
 
 
@@ -173,7 +173,7 @@ def to_machine_code(raw_code, _start_position) -> list:
     return code
 
 
-# Трансляция программы в машинный код
+# трансляция программы в машинный код
 def translate(source_filename) -> tuple[list, int]:
     lines, source_loc = read_lines(source_filename)
 
@@ -181,7 +181,7 @@ def translate(source_filename) -> tuple[list, int]:
 
     raw_code = link_labels(instrs, labels)
 
-    _start_position = find_program_start(labels)
+    _start_position = find_start(labels)
 
     code = to_machine_code(raw_code, _start_position)
 
