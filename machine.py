@@ -48,7 +48,6 @@ class DataPath:
     # регистр статуса программы
 
     alu = None
-    # АЛУ
 
     input_buffer = None
 
