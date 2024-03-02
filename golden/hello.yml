@@ -252,6 +252,6 @@ out_log: |
   DEBUG   machine:decode_and_execute_instr TICK:  403 | PC:   2 | IR: jmp   | DR:   2 | SR1:  12 | SR2:  47 | SR3: 100 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 114 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:  407 | PC:   3 | IR: load  | DR:  47 | SR1:  12 | SR2:  47 | SR3: 100 | AR:  15 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  47 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK:  413 | PC:   4 | IR: load  | DR:  33 | SR1:  12 | SR2:  47 | SR3:  33 | AR:  12 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  33 | mode: normal
-  WARNING machine:simulation    Instruction limit exceeded!
+  WARNING machine:simulation    Instruction limit exceeded
   INFO    machine:simulation    output_buffer: 'Hello, World'
   

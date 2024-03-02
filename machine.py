@@ -465,7 +465,7 @@ def simulation(code: list, memory: list, tokens: list, data_memory_size: int, in
         pass
 
     if instr_counter >= limit:
-        logging.warning("Instruction limit exceeded!")
+        logging.warning("Instruction limit exceeded")
 
     logging.info("output_buffer: %s", repr("".join(data_path.output_buffer)))
     return data_path.output_buffer, instr_counter, control_unit.cur_tick()

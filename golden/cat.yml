@@ -213,7 +213,7 @@ out_log: |
   WARNING machine:decode_and_execute_instr Entering into interruption...
   DEBUG   machine:decode_and_execute_instr TICK:  180 | PC:   2 | IR: di    | DR:  99 | SR1: None | SR2:  80 | SR3:  79 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  99 | mode: interrupt
   DEBUG   machine:signal_latch_sr input: '\n'
-  DEBUG   machine:decode_and_execute_instr TICK:  186 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  80 | SR3:  10 | AR:  98 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  186 | PC:   3 | IR: load  | DR:  79 | SR1: None | SR2:  80 | SR3:  10 | AR:  98 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
   DEBUG   machine:signal_output output_buffer: 'ITMO' << '\n'
   DEBUG   machine:decode_and_execute_instr TICK:  191 | PC:   4 | IR: store | DR:  10 | SR1: None | SR2:  80 | SR3:  10 | AR:  99 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
   DEBUG   machine:decode_and_execute_instr TICK:  195 | PC:   5 | IR: cmp   | DR:  10 | SR1: None | SR2:  80 | SR3:  10 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
