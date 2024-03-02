@@ -1,30 +1,30 @@
 _interrupt:
-    di ; запрет вложенных прерываний
-    in in_port ; получение слова из порта ввода
-    cmp line_feed
-    jnz continue
-    load flag
-    inc
-    store flag
-    continue:
-        store (buffer_pointer) ; сохранение в буфер
-        load buffer_pointer ; сдвиг указателя
-        inc
-        store buffer_pointer
-        load buffer_len ; увеличение длины
-        inc
-        store buffer_len
+    di
+    load sr3 (in_port)
+    cmp sr3 line_feed
+    jne _continue
+    load sr2 flag
+    inc sr2
+    store sr2 flag
+    _continue:
+        store sr3 (buffer_pointer)
+        load sr3 (buffer_pointer)
+        inc sr3
+        store sr3 (buffer_pointer)
+        load sr3 (buffer_len)
+        inc sr3
+        store sr3 (buffer_len)
         returning:
             iret
 
 message:
-    .word 18, 'What is your name?'
+    .word 'What is your name?\'
 message_pointer:
     .word message
 greeting:
-    .word 7, 'Hello, '
+    .word 'Hello, \'
 greeting_pointer:
-    .word greeting
+    .word _greeting
 exclamation:
     .word 1, 33
 exclamation_pointer:
@@ -32,9 +32,9 @@ exclamation_pointer:
 cycles:
     .word 0
 in_port:
-    .word 0
+    .word 98
 out_port:
-    .word 1
+    .word 99
 flag:
     .word 0
 line_feed:
@@ -51,9 +51,9 @@ buffer:
     .word 0
 
 _start:
-    load message
-    store cycles
-    message_loop:
+    load sr1 (message)
+    store sr1 (cycles)
+    _message_loop:
         load message_pointer
         inc
         store message_pointer
@@ -70,7 +70,7 @@ _start:
     di
     load greeting
     store cycles
-    greeting_loop:
+    _greeting_loop:
         load greeting_pointer
         inc
         store greeting_pointer
@@ -83,7 +83,7 @@ _start:
     load buffer_len
     dec
     store cycles
-    name_loop:
+    _name_loop:
         load (buffer_start_pointer)
         out out_port
         load buffer_start_pointer
@@ -92,8 +92,8 @@ _start:
         load cycles
         dec
         store cycles
-        jnz name_loop
-    exclamation_printing:
+        jnz _name_loop
+    _exclamation_printing:
         load exclamation_pointer
         inc
         store exclamation_pointer
