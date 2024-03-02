@@ -120,12 +120,13 @@ class DataPath:
         else:
             symbol = self.input_buffer.pop(0)
             symbol_code = ord(symbol)
+            self.data_memory[self.in_add] = symbol_code
             if reg_name == "sr1":
-                self.tr1 = symbol_code
+                self.tr1 = self.data_memory[self.in_add]
             elif reg_name == "sr2":
-                self.tr2 = symbol_code
+                self.tr2 = self.data_memory[self.in_add]
             else:
-                self.tr3 = symbol_code
+                self.tr3 = self.data_memory[self.in_add]
             logging.debug("input: %s", repr(symbol))
 
     def signal_wr(self):
