@@ -35,10 +35,10 @@ class DataPath:
     in_add = None
     out_add = None
 
-    # временные регистры
-    sr1 = None
-    sr2 = None
-    sr3 = None
+    # регистры временных переменных
+    tr1 = None
+    tr2 = None
+    tr3 = None
 
     ps = None
 
@@ -112,20 +112,20 @@ class DataPath:
         assert sel in {Selectors.FROM_INPUT, Selectors.FROM_ALU}, f"Unknown selector '{sel}'"
         if sel == Selectors.FROM_ALU:
             if reg_name == "sr1":
-                self.sr1 = self.alu.result
+                self.tr1 = self.alu.result
             elif reg_name == "sr2":
-                self.sr2 = self.alu.result
+                self.tr2 = self.alu.result
             else:
-                self.sr3 = self.alu.result
+                self.tr3 = self.alu.result
         else:
             symbol = self.input_buffer.pop(0)
             symbol_code = ord(symbol)
             if reg_name == "sr1":
-                self.sr1 = symbol_code
+                self.tr1 = symbol_code
             elif reg_name == "sr2":
-                self.sr2 = symbol_code
+                self.tr2 = symbol_code
             else:
-                self.sr3 = symbol_code
+                self.tr3 = symbol_code
             logging.debug("input: %s", repr(symbol))
 
     def signal_wr(self):
@@ -149,11 +149,11 @@ class DataPath:
                 Selectors.FROM_SR_3,
             }, f"Unknown left selector '{right_sel}'"
             if left_sel == Selectors.FROM_SR_1:
-                src_a = self.sr1
+                src_a = self.tr1
             elif left_sel == Selectors.FROM_SR_2:
-                src_a = self.sr2
+                src_a = self.tr2
             else:
-                src_a = self.sr3
+                src_a = self.tr3
 
         if right_sel is not None:
             assert right_sel in {Selectors.FROM_DR, Selectors.FROM_PC}, f"Unknown right selector '{right_sel}'"
@@ -439,9 +439,9 @@ class ControlUnit:
             self.data_path.pc,
             self.data_path.ir["opcode"],
             self.data_path.dr,
-            (self.data_path.sr1 if self.data_path.sr1 else "None"),
-            (self.data_path.sr2 if self.data_path.sr2 else "None"),
-            (self.data_path.sr3 if self.data_path.sr3 else "None"),
+            (self.data_path.tr1 if self.data_path.tr1 else "None"),
+            (self.data_path.tr2 if self.data_path.tr2 else "None"),
+            (self.data_path.tr3 if self.data_path.tr3 else "None"),
             self.data_path.ar,
             (1 if self.data_path.ps["N"] else 0),
             (1 if self.data_path.ps["Z"] else 0),
