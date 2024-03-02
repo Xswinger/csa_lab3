@@ -148,7 +148,7 @@ cstr -- Null-terminated (C string)
 |  add  |  2  |
 |  addi  |  3  |
 |  load  |  2  |
-|  store  |  1  |
+|  store  |  1 - 2  |
 |  cmp  |  2  |
 |  nop  |  1  |
 |  ei  |  1  |
