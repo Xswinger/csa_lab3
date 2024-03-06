@@ -25,6 +25,7 @@ class Opcode(str, Enum):
     ADDI = "addi"
 
     CMP = "cmp"
+    TEST = "test"
 
     INC = "inc"
     DEC = "dec"
