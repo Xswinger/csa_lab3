@@ -36,9 +36,9 @@ class DataPath:
     chr_out_add = None
     in_add = None
 
-    sr1 = None
-    sr2 = None
-    sr3 = None
+    tr1 = None
+    tr2 = None
+    tr3 = None
     # saved регистры
 
     ps = None
@@ -113,9 +113,9 @@ class DataPath:
     def signal_latch_sr(self, sel: Selectors, reg_name: str):
         assert sel in {Selectors.FROM_INPUT, Selectors.FROM_ALU}, f"Unknown selector '{sel}'"
         if sel == Selectors.FROM_ALU:
-            if reg_name == "sr1":
+            if reg_name == "tr1":
                 self.tr1 = self.alu.result
-            elif reg_name == "sr2":
+            elif reg_name == "tr2":
                 self.tr2 = self.alu.result
             else:
                 self.tr3 = self.alu.result
@@ -123,9 +123,9 @@ class DataPath:
             symbol = self.input_buffer.pop(0)
             symbol_code = ord(symbol)
             self.data_memory[self.in_add] = symbol_code
-            if reg_name == "sr1":
+            if reg_name == "tr1":
                 self.tr1 = self.data_memory[self.in_add]
-            elif reg_name == "sr2":
+            elif reg_name == "tr2":
                 self.tr2 = self.data_memory[self.in_add]
             else:
                 self.tr3 = self.data_memory[self.in_add]
@@ -151,13 +151,13 @@ class DataPath:
 
         if left_sel is not None:
             assert left_sel in {
-                Selectors.FROM_SR_1,
-                Selectors.FROM_SR_2,
-                Selectors.FROM_SR_3,
+                Selectors.FROM_TR_1,
+                Selectors.FROM_TR_2,
+                Selectors.FROM_TR_3,
             }, f"Unknown left selector '{right_sel}'"
-            if left_sel == Selectors.FROM_SR_1:
+            if left_sel == Selectors.FROM_TR_1:
                 src_a = self.tr1
-            elif left_sel == Selectors.FROM_SR_2:
+            elif left_sel == Selectors.FROM_TR_2:
                 src_a = self.tr2
             else:
                 src_a = self.tr3
@@ -200,12 +200,12 @@ class ControlUnit:
         opcode = ir["opcode"]
 
         if ir["is_indirect"]:
-            if ir["arg2"] == "sr1":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_1)
-            elif ir["arg2"] == "sr2":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
-            elif ir["arg2"] == "sr3":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
+            if ir["arg2"] == "tr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_1)
+            elif ir["arg2"] == "tr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_2)
+            elif ir["arg2"] == "tr3":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_3)
             else:
                 self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
 
@@ -227,38 +227,38 @@ class ControlUnit:
 
     def execute_rrr(self, code: object):
         if code["opcode"] == Opcode.ADD:
-            if code["arg1"] == "sr1":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_1)
-            elif code["arg1"] == "sr2":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
+            if code["arg1"] == "tr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_1)
+            elif code["arg1"] == "tr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_2)
             else:
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_3)
             self.data_path.signal_latch_dr_direct()
             self.inc_tick()
 
-            if code["arg2"] == "sr1":
+            if code["arg2"] == "tr1":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.ADD, left_sel=Selectors.FROM_SR_1, right_sel=Selectors.FROM_DR
+                    ALUOpcode.ADD, left_sel=Selectors.FROM_TR_1, right_sel=Selectors.FROM_DR
                 )
-            elif code["arg2"] == "sr2":
+            elif code["arg2"] == "tr2":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.ADD, left_sel=Selectors.FROM_SR_2, right_sel=Selectors.FROM_DR
+                    ALUOpcode.ADD, left_sel=Selectors.FROM_TR_2, right_sel=Selectors.FROM_DR
                 )
             else:
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.ADD, left_sel=Selectors.FROM_SR_3, right_sel=Selectors.FROM_DR
+                    ALUOpcode.ADD, left_sel=Selectors.FROM_TR_3, right_sel=Selectors.FROM_DR
                 )
             self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
 
     def execute_rri(self, code: object, ps: dict):
         if code["opcode"] == Opcode.STORE:
-            if code["arg1"] == "sr1":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_1)
-            elif code["arg1"] == "sr2":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
+            if code["arg1"] == "tr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_1)
+            elif code["arg1"] == "tr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_2)
             else:
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_3)
             self.data_path.signal_latch_dr_direct()
             self.data_path.signal_wr()
             self.inc_tick()
@@ -276,7 +276,7 @@ class ControlUnit:
             self.inc_tick()
 
         elif code["opcode"] == Opcode.ADDI:
-            self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_SR_1)
+            self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_TR_1)
             self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
 
@@ -285,86 +285,86 @@ class ControlUnit:
             self.inc_tick()
 
             self.data_path.signal_latch_dr()
-            if code["arg1"] == "sr1":
+            if code["arg1"] == "tr1":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.ADD, left_sel=Selectors.FROM_SR_1, right_sel=Selectors.FROM_DR
+                    ALUOpcode.ADD, left_sel=Selectors.FROM_TR_1, right_sel=Selectors.FROM_DR
                 )
-            elif code["arg2"] == "sr2":
+            elif code["arg2"] == "tr2":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.ADD, left_sel=Selectors.FROM_SR_2, right_sel=Selectors.FROM_DR
+                    ALUOpcode.ADD, left_sel=Selectors.FROM_TR_2, right_sel=Selectors.FROM_DR
                 )
             else:
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.ADD, left_sel=Selectors.FROM_SR_3, right_sel=Selectors.FROM_DR
+                    ALUOpcode.ADD, left_sel=Selectors.FROM_TR_3, right_sel=Selectors.FROM_DR
                 )
             self.data_path.signal_latch_sr(Selectors.FROM_ALU)
             self.inc_tick()
 
         elif code["opcode"] == Opcode.CMP:
-            if code["arg1"] == "sr1":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_1)
-            elif code["arg1"] == "sr2":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
+            if code["arg1"] == "tr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_1)
+            elif code["arg1"] == "tr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_2)
             else:
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_3)
             self.data_path.signal_latch_dr_direct()
             self.inc_tick()
 
-            if code["arg2"] == "sr1":
+            if code["arg2"] == "tr1":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.CMP, left_sel=Selectors.FROM_SR_1, right_sel=Selectors.FROM_DR
+                    ALUOpcode.CMP, left_sel=Selectors.FROM_TR_1, right_sel=Selectors.FROM_DR
                 )
-            elif code["arg2"] == "sr2":
+            elif code["arg2"] == "tr2":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.CMP, left_sel=Selectors.FROM_SR_2, right_sel=Selectors.FROM_DR
+                    ALUOpcode.CMP, left_sel=Selectors.FROM_TR_2, right_sel=Selectors.FROM_DR
                 )
             else:
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.CMP, left_sel=Selectors.FROM_SR_3, right_sel=Selectors.FROM_DR
+                    ALUOpcode.CMP, left_sel=Selectors.FROM_TR_3, right_sel=Selectors.FROM_DR
                 )
             self.inc_tick()
         elif code["opcode"] == Opcode.TEST:
-            if code["arg1"] == "sr1":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_1)
-            elif code["arg1"] == "sr2":
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
+            if code["arg1"] == "tr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_1)
+            elif code["arg1"] == "tr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_2)
             else:
-                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_3)
             self.data_path.signal_latch_dr_direct()
             self.inc_tick()
 
-            if code["arg2"] == "sr1":
+            if code["arg2"] == "tr1":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.TEST, left_sel=Selectors.FROM_SR_1, right_sel=Selectors.FROM_DR
+                    ALUOpcode.TEST, left_sel=Selectors.FROM_TR_1, right_sel=Selectors.FROM_DR
                 )
-            elif code["arg2"] == "sr2":
+            elif code["arg2"] == "tr2":
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.TEST, left_sel=Selectors.FROM_SR_2, right_sel=Selectors.FROM_DR
+                    ALUOpcode.TEST, left_sel=Selectors.FROM_TR_2, right_sel=Selectors.FROM_DR
                 )
             else:
                 self.data_path.signal_execute_alu_op(
-                    ALUOpcode.TEST, left_sel=Selectors.FROM_SR_3, right_sel=Selectors.FROM_DR
+                    ALUOpcode.TEST, left_sel=Selectors.FROM_TR_3, right_sel=Selectors.FROM_DR
                 )
             self.inc_tick()
 
     def execute_ri(self, code: object, ps: dict):
         if code["opcode"] == Opcode.INC:
-            if code["arg1"] == "sr1":
-                self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_SR_1)
-            elif code["arg2"] == "sr2":
-                self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_SR_2)
+            if code["arg1"] == "tr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_TR_1)
+            elif code["arg2"] == "tr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_TR_2)
             else:
-                self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_SR_3)
+                self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_TR_3)
 
             self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
         elif code["opcode"] == Opcode.DEC:
-            if code["arg1"] == "sr1":
-                self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_SR_1)
-            elif code["arg2"] == "sr2":
-                self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_SR_2)
+            if code["arg1"] == "tr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_TR_1)
+            elif code["arg2"] == "tr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_TR_2)
             else:
-                self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_SR_3)
+                self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_TR_3)
 
             self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
@@ -448,7 +448,7 @@ class ControlUnit:
         self.data_path.signal_latch_ar()
         self.data_path.signal_latch_ir()
         if self.data_path.ir["opcode"] == Opcode.STORE or self.data_path.ir["opcode"] == Opcode.LOAD:
-            if self.data_path.ir["arg2"] not in ["sr1", "sr2", "sr3"]:
+            if self.data_path.ir["arg2"] not in ["tr1", "tr2", "tr3"]:
                 self.data_path.ar = self.data_path.ir["arg2"]
         self.inc_tick()
 
@@ -473,14 +473,14 @@ class ControlUnit:
         return
 
     def __repr__(self) -> str:
-        return "TICK: {:4} | PC: {:3} | IR: {:5} | DR: {:3} | SR1: {:3} | SR2: {:3} | SR3: {:3} | AR: {:3} | N: {:1} | Z: {:1} | INT_EN: {:1} | data[AR]: {:3} | mode: {}".format(
+        return "TICK: {:4} | PC: {:3} | IR: {:5} | DR: {:3} | TR1: {:3} | TR2: {:3} | TR3: {:3} | AR: {:3} | N: {:1} | Z: {:1} | INT_EN: {:1} | data[AR]: {:3} | mode: {}".format(
             self.cur_tick(),
             self.data_path.pc,
             self.data_path.ir["opcode"],
             self.data_path.dr,
-            (self.data_path.sr1 if self.data_path.sr1 or self.data_path.sr1 == 0 else "None"),
-            (self.data_path.sr2 if self.data_path.sr2 or self.data_path.sr2 == 0 else "None"),
-            (self.data_path.sr3 if self.data_path.sr3 or self.data_path.sr3 == 0 else "None"),
+            (self.data_path.tr1 if self.data_path.tr1 or self.data_path.tr1 == 0 else "None"),
+            (self.data_path.tr2 if self.data_path.tr2 or self.data_path.tr2 == 0 else "None"),
+            (self.data_path.tr3 if self.data_path.tr3 or self.data_path.tr3 == 0 else "None"),
             self.data_path.ar,
             (1 if self.data_path.ps["N"] else 0),
             (1 if self.data_path.ps["Z"] else 0),

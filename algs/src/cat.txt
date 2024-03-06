@@ -1,12 +1,12 @@
 _interrupt:
     di
-    load sr3 (in_port)
-    store sr3 (out_port)
-    cmp sr3 line_feed
+    load tr3 (in_port)
+    store tr3 (out_port)
+    cmp tr3 line_feed
     jne _returning
-    load sr2 flag
-    inc sr2
-    store sr2 flag
+    load tr2 flag
+    inc tr2
+    store tr2 flag
     _returning:
         iret
 
@@ -26,7 +26,7 @@ line_feed:
 _start:
     ei
     _spin_loop:
-        load sr1 flag
-        cmp sr1 zero_flag
+        load tr1 flag
+        cmp tr1 zero_flag
         je _spin_loop
     halt

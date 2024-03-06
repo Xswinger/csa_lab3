@@ -8,15 +8,15 @@ out_port:
     .word 1
 
 _start:
-    load sr1 pointer
-    load sr2 null_symb
+    load tr1 pointer
+    load tr2 null_symb
     _loop:
-        load sr3 (sr1)
-        cmp sr3 sr2
+        load tr3 (tr1)
+        cmp tr3 tr2
         je _end
-        load sr3 (sr1)
-        store sr3 (out_port)
-        inc sr1
+        load tr3 (tr1)
+        store tr3 (out_port)
+        inc tr1
         jmp _loop
     _end:
         halt

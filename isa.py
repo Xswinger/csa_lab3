@@ -44,9 +44,9 @@ class Selectors(str, Enum):
     FROM_ALU = "from_alu"
     FROM_DR = "from_dr"
     FROM_PC = "from_pc"
-    FROM_SR_1 = "from_sr_1"
-    FROM_SR_2 = "from_sr_2"
-    FROM_SR_3 = "from_sr_3"
+    FROM_TR_1 = "from_tr_1"
+    FROM_TR_2 = "from_tr_2"
+    FROM_TR_3 = "from_tr_3"
     FROM_PS = "from_ps"
 
     def __str__(self) -> str:

@@ -1,13 +1,13 @@
 in_source: |-
   _interrupt:
     di
-    load sr3 (in_port)
-    store sr3 (out_port)
-    cmp sr3 line_feed
+    load tr3 (in_port)
+    store tr3 (out_port)
+    cmp tr3 line_feed
     jne _returning
-    load sr2 flag
-    inc sr2
-    store sr2 flag
+    load tr2 flag
+    inc tr2
+    store tr2 flag
     _returning:
         iret
 
@@ -27,8 +27,8 @@ in_source: |-
   _start:
     ei
     _spin_loop:
-        load sr1 flag
-        cmp sr1 zero_flag
+        load tr1 flag
+        cmp tr1 zero_flag
         je _spin_loop
     halt
 in_stdin: |
@@ -37,17 +37,17 @@ in_stdin: |
 out_code: |-
   [{"index": 0, "opcode": "jmp", "arg1": 10, "arg2": 0, "arg3": 0, "is_indirect": false},
    {"index": 1, "opcode": "di", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false},
-   {"index": 2, "opcode": "load", "arg1": "sr3", "arg2": 4, "arg3": 0, "is_indirect": true},
-   {"index": 3, "opcode": "store", "arg1": "sr3", "arg2": 5, "arg3": 0, "is_indirect": true},
-   {"index": 4, "opcode": "cmp", "arg1": "sr3", "arg2": 8, "arg3": 0, "is_indirect": false},
+   {"index": 2, "opcode": "load", "arg1": "tr3", "arg2": 4, "arg3": 0, "is_indirect": true},
+   {"index": 3, "opcode": "store", "arg1": "tr3", "arg2": 5, "arg3": 0, "is_indirect": true},
+   {"index": 4, "opcode": "cmp", "arg1": "tr3", "arg2": 8, "arg3": 0, "is_indirect": false},
    {"index": 5, "opcode": "jne", "arg1": 9, "arg2": 0, "arg3": 0, "is_indirect": false},
-   {"index": 6, "opcode": "load", "arg1": "sr2", "arg2": 6, "arg3": 0, "is_indirect": false},
-   {"index": 7, "opcode": "inc", "arg1": "sr2", "arg2": 0, "arg3": 0, "is_indirect": false},
-   {"index": 8, "opcode": "store", "arg1": "sr2", "arg2": 6, "arg3": 0, "is_indirect": false},
+   {"index": 6, "opcode": "load", "arg1": "tr2", "arg2": 6, "arg3": 0, "is_indirect": false},
+   {"index": 7, "opcode": "inc", "arg1": "tr2", "arg2": 0, "arg3": 0, "is_indirect": false},
+   {"index": 8, "opcode": "store", "arg1": "tr2", "arg2": 6, "arg3": 0, "is_indirect": false},
    {"index": 9, "opcode": "iret", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false},
    {"index": 10, "opcode": "ei", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false},
-   {"index": 11, "opcode": "load", "arg1": "sr1", "arg2": 6, "arg3": 0, "is_indirect": false},
-   {"index": 12, "opcode": "cmp", "arg1": "sr1", "arg2": 7, "arg3": 0, "is_indirect": false},
+   {"index": 11, "opcode": "load", "arg1": "tr1", "arg2": 6, "arg3": 0, "is_indirect": false},
+   {"index": 12, "opcode": "cmp", "arg1": "tr1", "arg2": 7, "arg3": 0, "is_indirect": false},
    {"index": 13, "opcode": "je", "arg1": 11, "arg2": 0, "arg3": 0, "is_indirect": false},
    {"index": 14, "opcode": "halt", "arg1": 0, "arg2": 0, "arg3": 0, "is_indirect": false}]
 out_mem: |-
@@ -157,75 +157,75 @@ out_stdout: |
   
   instr_counter:  55 ticks: 228
 out_log: |
-  DEBUG   machine:decode_and_execute_instr TICK:    3 | PC:  10 | IR: jmp   | DR:  10 | SR1: None | SR2: None | SR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:    6 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2: None | SR3: None | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:    3 | PC:  10 | IR: jmp   | DR:  10 | TR1: None | TR2: None | TR3: None | AR:   0 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:    6 | PC:  11 | IR: ei    | DR:   0 | TR1: None | TR2: None | TR3: None | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   WARNING machine:decode_and_execute_instr Entering into interruption...
-  DEBUG   machine:decode_and_execute_instr TICK:   12 | PC:   2 | IR: di    | DR:   0 | SR1: None | SR2: None | SR3: None | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   12 | PC:   2 | IR: di    | DR:   0 | TR1: None | TR2: None | TR3: None | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
   DEBUG   machine:signal_latch_sr input: 'I'
-  DEBUG   machine:decode_and_execute_instr TICK:   18 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2: None | SR3:  73 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   18 | PC:   3 | IR: load  | DR:   0 | TR1: None | TR2: None | TR3:  73 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
   DEBUG   machine:signal_output output_buffer: '' << 'I'
-  DEBUG   machine:decode_and_execute_instr TICK:   23 | PC:   4 | IR: store | DR:  73 | SR1: None | SR2: None | SR3:  73 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  73 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   27 | PC:   5 | IR: cmp   | DR:  73 | SR1: None | SR2: None | SR3:  73 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   29 | PC:   6 | IR: jne   | DR:   1 | SR1: None | SR2: None | SR3:  73 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   33 | PC:   7 | IR: load  | DR:   0 | SR1: None | SR2:   0 | SR3:  73 | AR:   6 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   36 | PC:   8 | IR: inc   | DR:   1 | SR1: None | SR2:  74 | SR3:  73 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   39 | PC:   9 | IR: store | DR:  74 | SR1: None | SR2:  74 | SR3:  73 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  74 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   45 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  74 | SR3:  73 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:   48 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  74 | SR3:  73 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   23 | PC:   4 | IR: store | DR:  73 | TR1: None | TR2: None | TR3:  73 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  73 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   27 | PC:   5 | IR: cmp   | DR:  73 | TR1: None | TR2: None | TR3:  73 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   29 | PC:   6 | IR: jne   | DR:   1 | TR1: None | TR2: None | TR3:  73 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   33 | PC:   7 | IR: load  | DR:   0 | TR1: None | TR2:   0 | TR3:  73 | AR:   6 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   36 | PC:   8 | IR: inc   | DR:   1 | TR1: None | TR2:  74 | TR3:  73 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   39 | PC:   9 | IR: store | DR:  74 | TR1: None | TR2:  74 | TR3:  73 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  74 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   45 | PC:  10 | IR: iret  | DR:  10 | TR1: None | TR2:  74 | TR3:  73 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   48 | PC:  11 | IR: ei    | DR:   0 | TR1: None | TR2:  74 | TR3:  73 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   WARNING machine:decode_and_execute_instr Entering into interruption...
-  DEBUG   machine:decode_and_execute_instr TICK:   54 | PC:   2 | IR: di    | DR:  73 | SR1: None | SR2:  74 | SR3:  73 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  73 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   54 | PC:   2 | IR: di    | DR:  73 | TR1: None | TR2:  74 | TR3:  73 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  73 | mode: interrupt
   DEBUG   machine:signal_latch_sr input: 'T'
-  DEBUG   machine:decode_and_execute_instr TICK:   60 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  74 | SR3:  84 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   60 | PC:   3 | IR: load  | DR:   0 | TR1: None | TR2:  74 | TR3:  84 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
   DEBUG   machine:signal_output output_buffer: 'I' << 'T'
-  DEBUG   machine:decode_and_execute_instr TICK:   65 | PC:   4 | IR: store | DR:  84 | SR1: None | SR2:  74 | SR3:  84 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  84 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   69 | PC:   5 | IR: cmp   | DR:  84 | SR1: None | SR2:  74 | SR3:  84 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   71 | PC:   6 | IR: jne   | DR:   1 | SR1: None | SR2:  74 | SR3:  84 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   75 | PC:   7 | IR: load  | DR:  74 | SR1: None | SR2:  74 | SR3:  84 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  74 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   78 | PC:   8 | IR: inc   | DR:   1 | SR1: None | SR2:  85 | SR3:  84 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   81 | PC:   9 | IR: store | DR:  85 | SR1: None | SR2:  85 | SR3:  84 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  85 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:   87 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  85 | SR3:  84 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:   90 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  85 | SR3:  84 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   65 | PC:   4 | IR: store | DR:  84 | TR1: None | TR2:  74 | TR3:  84 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  84 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   69 | PC:   5 | IR: cmp   | DR:  84 | TR1: None | TR2:  74 | TR3:  84 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   71 | PC:   6 | IR: jne   | DR:   1 | TR1: None | TR2:  74 | TR3:  84 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   75 | PC:   7 | IR: load  | DR:  74 | TR1: None | TR2:  74 | TR3:  84 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  74 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   78 | PC:   8 | IR: inc   | DR:   1 | TR1: None | TR2:  85 | TR3:  84 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   81 | PC:   9 | IR: store | DR:  85 | TR1: None | TR2:  85 | TR3:  84 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  85 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   87 | PC:  10 | IR: iret  | DR:  10 | TR1: None | TR2:  85 | TR3:  84 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:   90 | PC:  11 | IR: ei    | DR:   0 | TR1: None | TR2:  85 | TR3:  84 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   WARNING machine:decode_and_execute_instr Entering into interruption...
-  DEBUG   machine:decode_and_execute_instr TICK:   96 | PC:   2 | IR: di    | DR:  84 | SR1: None | SR2:  85 | SR3:  84 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  84 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   96 | PC:   2 | IR: di    | DR:  84 | TR1: None | TR2:  85 | TR3:  84 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  84 | mode: interrupt
   DEBUG   machine:signal_latch_sr input: 'M'
-  DEBUG   machine:decode_and_execute_instr TICK:  102 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  85 | SR3:  77 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  102 | PC:   3 | IR: load  | DR:   0 | TR1: None | TR2:  85 | TR3:  77 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
   DEBUG   machine:signal_output output_buffer: 'IT' << 'M'
-  DEBUG   machine:decode_and_execute_instr TICK:  107 | PC:   4 | IR: store | DR:  77 | SR1: None | SR2:  85 | SR3:  77 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  77 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  111 | PC:   5 | IR: cmp   | DR:  77 | SR1: None | SR2:  85 | SR3:  77 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  113 | PC:   6 | IR: jne   | DR:   1 | SR1: None | SR2:  85 | SR3:  77 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  117 | PC:   7 | IR: load  | DR:  85 | SR1: None | SR2:  85 | SR3:  77 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  85 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  120 | PC:   8 | IR: inc   | DR:   1 | SR1: None | SR2:  78 | SR3:  77 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  123 | PC:   9 | IR: store | DR:  78 | SR1: None | SR2:  78 | SR3:  77 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  78 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  129 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  78 | SR3:  77 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:  132 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  78 | SR3:  77 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  107 | PC:   4 | IR: store | DR:  77 | TR1: None | TR2:  85 | TR3:  77 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  77 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  111 | PC:   5 | IR: cmp   | DR:  77 | TR1: None | TR2:  85 | TR3:  77 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  113 | PC:   6 | IR: jne   | DR:   1 | TR1: None | TR2:  85 | TR3:  77 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  117 | PC:   7 | IR: load  | DR:  85 | TR1: None | TR2:  85 | TR3:  77 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  85 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  120 | PC:   8 | IR: inc   | DR:   1 | TR1: None | TR2:  78 | TR3:  77 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  123 | PC:   9 | IR: store | DR:  78 | TR1: None | TR2:  78 | TR3:  77 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  78 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  129 | PC:  10 | IR: iret  | DR:  10 | TR1: None | TR2:  78 | TR3:  77 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  132 | PC:  11 | IR: ei    | DR:   0 | TR1: None | TR2:  78 | TR3:  77 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   WARNING machine:decode_and_execute_instr Entering into interruption...
-  DEBUG   machine:decode_and_execute_instr TICK:  138 | PC:   2 | IR: di    | DR:  77 | SR1: None | SR2:  78 | SR3:  77 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  77 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  138 | PC:   2 | IR: di    | DR:  77 | TR1: None | TR2:  78 | TR3:  77 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  77 | mode: interrupt
   DEBUG   machine:signal_latch_sr input: 'O'
-  DEBUG   machine:decode_and_execute_instr TICK:  144 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  78 | SR3:  79 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  144 | PC:   3 | IR: load  | DR:   0 | TR1: None | TR2:  78 | TR3:  79 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
   DEBUG   machine:signal_output output_buffer: 'ITM' << 'O'
-  DEBUG   machine:decode_and_execute_instr TICK:  149 | PC:   4 | IR: store | DR:  79 | SR1: None | SR2:  78 | SR3:  79 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  79 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  153 | PC:   5 | IR: cmp   | DR:  79 | SR1: None | SR2:  78 | SR3:  79 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  155 | PC:   6 | IR: jne   | DR:   1 | SR1: None | SR2:  78 | SR3:  79 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  159 | PC:   7 | IR: load  | DR:  78 | SR1: None | SR2:  78 | SR3:  79 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  78 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  162 | PC:   8 | IR: inc   | DR:   1 | SR1: None | SR2:  80 | SR3:  79 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  165 | PC:   9 | IR: store | DR:  80 | SR1: None | SR2:  80 | SR3:  79 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  80 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  171 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  80 | SR3:  79 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:  174 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  80 | SR3:  79 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  149 | PC:   4 | IR: store | DR:  79 | TR1: None | TR2:  78 | TR3:  79 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  79 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  153 | PC:   5 | IR: cmp   | DR:  79 | TR1: None | TR2:  78 | TR3:  79 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  155 | PC:   6 | IR: jne   | DR:   1 | TR1: None | TR2:  78 | TR3:  79 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  159 | PC:   7 | IR: load  | DR:  78 | TR1: None | TR2:  78 | TR3:  79 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  78 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  162 | PC:   8 | IR: inc   | DR:   1 | TR1: None | TR2:  80 | TR3:  79 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  165 | PC:   9 | IR: store | DR:  80 | TR1: None | TR2:  80 | TR3:  79 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  80 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  171 | PC:  10 | IR: iret  | DR:  10 | TR1: None | TR2:  80 | TR3:  79 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  174 | PC:  11 | IR: ei    | DR:   0 | TR1: None | TR2:  80 | TR3:  79 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   WARNING machine:decode_and_execute_instr Entering into interruption...
-  DEBUG   machine:decode_and_execute_instr TICK:  180 | PC:   2 | IR: di    | DR:  79 | SR1: None | SR2:  80 | SR3:  79 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  79 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  180 | PC:   2 | IR: di    | DR:  79 | TR1: None | TR2:  80 | TR3:  79 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  79 | mode: interrupt
   DEBUG   machine:signal_latch_sr input: '\n'
-  DEBUG   machine:decode_and_execute_instr TICK:  186 | PC:   3 | IR: load  | DR:   0 | SR1: None | SR2:  80 | SR3:  10 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  186 | PC:   3 | IR: load  | DR:   0 | TR1: None | TR2:  80 | TR3:  10 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
   DEBUG   machine:signal_output output_buffer: 'ITMO' << '\n'
-  DEBUG   machine:decode_and_execute_instr TICK:  191 | PC:   4 | IR: store | DR:  10 | SR1: None | SR2:  80 | SR3:  10 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  195 | PC:   5 | IR: cmp   | DR:  10 | SR1: None | SR2:  80 | SR3:  10 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  197 | PC:   6 | IR: jne   | DR:   1 | SR1: None | SR2:  80 | SR3:  10 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  201 | PC:   7 | IR: load  | DR:  80 | SR1: None | SR2:  80 | SR3:  10 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  80 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  204 | PC:   8 | IR: inc   | DR:   1 | SR1: None | SR2:  11 | SR3:  10 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  207 | PC:   9 | IR: store | DR:  11 | SR1: None | SR2:  11 | SR3:  10 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  11 | mode: interrupt
-  DEBUG   machine:decode_and_execute_instr TICK:  213 | PC:  10 | IR: iret  | DR:  10 | SR1: None | SR2:  11 | SR3:  10 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:  216 | PC:  11 | IR: ei    | DR:   0 | SR1: None | SR2:  11 | SR3:  10 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:  220 | PC:  12 | IR: load  | DR:  11 | SR1:  11 | SR2:  11 | SR3:  10 | AR:   6 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:  11 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:  224 | PC:  13 | IR: cmp   | DR:  11 | SR1:  11 | SR2:  11 | SR3:  10 | AR:  12 | N: 1 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
-  DEBUG   machine:decode_and_execute_instr TICK:  226 | PC:  14 | IR: je    | DR:   0 | SR1:  11 | SR2:  11 | SR3:  10 | AR:  13 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  191 | PC:   4 | IR: store | DR:  10 | TR1: None | TR2:  80 | TR3:  10 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  195 | PC:   5 | IR: cmp   | DR:  10 | TR1: None | TR2:  80 | TR3:  10 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  197 | PC:   6 | IR: jne   | DR:   1 | TR1: None | TR2:  80 | TR3:  10 | AR:   5 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  201 | PC:   7 | IR: load  | DR:  80 | TR1: None | TR2:  80 | TR3:  10 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  80 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  204 | PC:   8 | IR: inc   | DR:   1 | TR1: None | TR2:  11 | TR3:  10 | AR:   7 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   1 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  207 | PC:   9 | IR: store | DR:  11 | TR1: None | TR2:  11 | TR3:  10 | AR:   6 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  11 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:  213 | PC:  10 | IR: iret  | DR:  10 | TR1: None | TR2:  11 | TR3:  10 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  10 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  216 | PC:  11 | IR: ei    | DR:   0 | TR1: None | TR2:  11 | TR3:  10 | AR:  10 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  220 | PC:  12 | IR: load  | DR:  11 | TR1:  11 | TR2:  11 | TR3:  10 | AR:   6 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:  11 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  224 | PC:  13 | IR: cmp   | DR:  11 | TR1:  11 | TR2:  11 | TR3:  10 | AR:  12 | N: 1 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
+  DEBUG   machine:decode_and_execute_instr TICK:  226 | PC:  14 | IR: je    | DR:   0 | TR1:  11 | TR2:  11 | TR3:  10 | AR:  13 | N: 0 | Z: 0 | INT_EN: 1 | data[AR]:   0 | mode: normal
   INFO    machine:simulation    output_buffer: 'ITMO\n'
 

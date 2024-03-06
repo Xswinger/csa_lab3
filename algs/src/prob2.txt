@@ -14,26 +14,26 @@ out_port:
     .word 2
 
 _start:
-    load sr1 cur
-    load sr2 limit
-    cmp sr2 sr1
+    load tr1 cur
+    load tr2 limit
+    cmp tr2 tr1
     jg _end
-    load sr2 par_check
-    test sr1 sr2
+    load tr2 par_check
+    test tr1 tr2
     jne _next_turn
-    load sr3 result
-    add sr3 sr1
-    store sr3 result
+    load tr3 result
+    add tr3 tr1
+    store tr3 result
     _next_turn:
-        load sr1 cur
-        store sr1 tmp
-        load sr2 prev
-        add sr1 sr2
-        store sr1 cur
-        load sr1 tmp
-        store sr1 prev
+        load tr1 cur
+        store tr1 tmp
+        load tr2 prev
+        add tr1 tr2
+        store tr1 cur
+        load tr1 tmp
+        store tr1 prev
         jmp _start
     _end:
-        load sr3 result
-        store sr3 (out_port)
+        load tr3 result
+        store tr3 (out_port)
     halt

@@ -1,20 +1,20 @@
 _interrupt:
     di
-    load sr1 (in_port)
-    load sr3 line_feed
-    cmp sr3 sr1
+    load tr1 (in_port)
+    load tr3 line_feed
+    cmp tr3 tr1
     jne _continue
-    load sr2 flag
-    inc sr2
-    store sr2 flag
+    load tr2 flag
+    inc tr2
+    store tr2 flag
     _continue:
-        store sr1 (buffer)
-        load sr3 buffer
-        dec sr3
-        store sr3 buffer
-        load sr3 buffer_len
-        inc sr3
-        store sr3 buffer_len
+        store tr1 (buffer)
+        load tr3 buffer
+        dec tr3
+        store tr3 buffer
+        load tr3 buffer_len
+        inc tr3
+        store tr3 buffer_len
         iret
 
 message:
@@ -43,51 +43,51 @@ cmp_zero:
     .word 0
 
 _start:
-    load sr1 message_pointer
-    load sr2 null_symb
+    load tr1 message_pointer
+    load tr2 null_symb
     _message_loop:
-        load sr3 (sr1)
-        cmp sr3 sr2
+        load tr3 (tr1)
+        cmp tr3 tr2
         je _end_ml
-        load sr3 (sr1)
-        store sr3 (out_port)
-        inc sr1
+        load tr3 (tr1)
+        store tr3 (out_port)
+        inc tr1
         jmp _message_loop
     _end_ml:
-        load sr1 line_feed
-        store sr1 (out_port)
+        load tr1 line_feed
+        store tr1 (out_port)
         ei
     _spin_loop:
-        load sr1 flag
-        load sr2 cmp_zero
-        cmp sr1 sr2
+        load tr1 flag
+        load tr2 cmp_zero
+        cmp tr1 tr2
         je _spin_loop
     di
-    load sr1 greeting_pointer
-    load sr2 null_symb
+    load tr1 greeting_pointer
+    load tr2 null_symb
     _greeting_loop:
-        load sr3 (sr1)
-        cmp sr3 sr2
+        load tr3 (tr1)
+        cmp tr3 tr2
         je _end_gl
-        load sr3 (sr1)
-        store sr3 (out_port)
-        inc sr1
+        load tr3 (tr1)
+        store tr3 (out_port)
+        inc tr1
         jmp _greeting_loop
     _end_gl:
-        load sr2 buffer_len
-        load sr1 buffer
-        add sr1 sr2
-        store sr1 buffer
+        load tr2 buffer_len
+        load tr1 buffer
+        add tr1 tr2
+        store tr1 buffer
     _name_loop:
-        load sr3 (buffer)
-        store sr3 (out_port)
-        load sr1 buffer
-        dec sr1
-        store sr1 buffer
-        load sr1 buffer_len
-        dec sr1
-        store sr1 buffer_len
-        load sr3 cmp_zero
-        cmp sr1 sr3
+        load tr3 (buffer)
+        store tr3 (out_port)
+        load tr1 buffer
+        dec tr1
+        store tr1 buffer
+        load tr1 buffer_len
+        dec tr1
+        store tr1 buffer_len
+        load tr3 cmp_zero
+        cmp tr1 tr3
         jne _name_loop
     halt
