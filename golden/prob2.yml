@@ -672,6 +672,6 @@ out_log: |
   DEBUG   machine:decode_and_execute_instr TICK: 1768 | PC:   4 | IR: cmp   | DR: 4000000 | TR1: 5702887 | TR2: 4000000 | TR3: 4613732 | AR:   3 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK: 1771 | PC:  19 | IR: jg    | DR:  19 | TR1: 5702887 | TR2: 4000000 | TR3: 4613732 | AR:   4 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 4000000 | mode: normal
   DEBUG   machine:decode_and_execute_instr TICK: 1775 | PC:  20 | IR: load  | DR: 4613732 | TR1: 5702887 | TR2: 4000000 | TR3: 4613732 | AR:   9 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 4613732 | mode: normal
-  DEBUG   machine:decode_and_execute_instr output_buffer: '' << 4613732
+  DEBUG   machine:signal_output output_buffer: '' << 4613732
   DEBUG   machine:decode_and_execute_instr TICK: 1780 | PC:  21 | IR: store | DR: 4613732 | TR1: 5702887 | TR2: 4000000 | TR3: 4613732 | AR:   2 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]: 4613732 | mode: normal
   INFO    machine:simulation    output_buffer: '4613732'

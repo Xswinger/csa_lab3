@@ -422,7 +422,7 @@ class ControlUnit:
 
     def go_to_interrupt(self):
         self.data_path.dr = 3
-        #  Сохраняем на стеке PS и PC
+        #  сохранить PC
         self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
         self.data_path.signal_latch_ar()
         self.inc_tick()

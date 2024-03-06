@@ -162,7 +162,7 @@ out_log: |
   WARNING machine:decode_and_execute_instr Entering into interruption...
   DEBUG   machine:decode_and_execute_instr TICK:   12 | PC:   2 | IR: di    | DR:   0 | TR1: None | TR2: None | TR3: None | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
   DEBUG   machine:signal_latch_sr input: 'I'
-  DEBUG   machine:decode_and_execute_instr TICK:   18 | PC:   3 | IR: load  | DR:   0 | TR1: None | TR2: None | TR3:  73 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
+  DEBUG   machine:decode_and_execute_instr TICK:   18 | PC:   3 | IR: load  | DR:   0 | TR1: None | TR2: None | TR3:  73 | AR:   0 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:  73 | mode: interrupt
   DEBUG   machine:signal_output output_buffer: '' << 'I'
   DEBUG   machine:decode_and_execute_instr TICK:   23 | PC:   4 | IR: store | DR:  73 | TR1: None | TR2: None | TR3:  73 | AR:   1 | N: 0 | Z: 0 | INT_EN: 0 | data[AR]:  73 | mode: interrupt
   DEBUG   machine:decode_and_execute_instr TICK:   27 | PC:   5 | IR: cmp   | DR:  73 | TR1: None | TR2: None | TR3:  73 | AR:   4 | N: 0 | Z: 1 | INT_EN: 0 | data[AR]:   0 | mode: interrupt
