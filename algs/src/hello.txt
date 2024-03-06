@@ -5,7 +5,7 @@ pointer:
 null_symb:
     .word '/'
 out_port:
-    .word 99
+    .word 1
 
 _start:
     load sr1 pointer

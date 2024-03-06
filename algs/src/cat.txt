@@ -13,9 +13,9 @@ _interrupt:
 intr:
     .word _interrupt
 in_port:
-    .word 98
+    .word 0
 out_port:
-    .word 99
+    .word 1
 flag:
     .word 0
 zero_flag:

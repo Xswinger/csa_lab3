@@ -1,0 +1,39 @@
+limit:
+    .word 4000000
+par_check:
+    .word 1
+prev:
+    .word 1
+cur:
+    .word 2
+tmp:
+    .word 0
+result:
+    .word 0
+out_port:
+    .word 2
+
+_start:
+    load sr1 cur
+    load sr2 limit
+    cmp sr2 sr1
+    jg _end
+    load sr2 par_check
+    test sr1 sr2
+    jne _next_turn
+    load sr3 result
+    add sr3 sr1
+    store sr3 result
+    _next_turn:
+        load sr1 cur
+        store sr1 tmp
+        load sr2 prev
+        add sr1 sr2
+        store sr1 cur
+        load sr1 tmp
+        store sr1 prev
+        jmp _start
+    _end:
+        load sr3 result
+        store sr3 (out_port)
+    halt

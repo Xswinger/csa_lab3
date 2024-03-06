@@ -31,6 +31,7 @@ class Opcode(str, Enum):
 
     JNE = "jne"
     JE = "je"
+    JG = "jg"
     JMP = "jmp"
 
     def __str__(self):
@@ -52,9 +53,9 @@ class Selectors(str, Enum):
 
 
 rrr_format_instr = [Opcode.ADD]
-rri_format_instr = [Opcode.STORE, Opcode.LOAD, Opcode.ADDI, Opcode.CMP]
+rri_format_instr = [Opcode.STORE, Opcode.LOAD, Opcode.ADDI, Opcode.CMP, Opcode.TEST]
 ri_format_instr = [Opcode.INC, Opcode.DEC]
-i_format_instr = [Opcode.NOP, Opcode.HALT, Opcode.IRET, Opcode.JNE, Opcode.JE, Opcode.JMP]
+i_format_instr = [Opcode.NOP, Opcode.HALT, Opcode.IRET, Opcode.JNE, Opcode.JE, Opcode.JG, Opcode.JMP]
 
 
 def write_code(filename: str, code: list):

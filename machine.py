@@ -32,13 +32,14 @@ class DataPath:
 
     ir = None
 
+    int_out_add = None
+    chr_out_add = None
     in_add = None
-    out_add = None
 
-    # регистры временных переменных
-    tr1 = None
-    tr2 = None
-    tr3 = None
+    sr1 = None
+    sr2 = None
+    sr3 = None
+    # saved регистры
 
     ps = None
 
@@ -55,10 +56,11 @@ class DataPath:
         self.instr_memory_size = instr_memory_size
         self.instr_memory = [0] * instr_memory_size
 
-        self.in_add = 98
-        self.out_add = 99
+        self.in_add = 0
+        self.chr_out_add = 1
+        self.int_out_add = 2
 
-        self.ar = 0
+        self.ar = 4
         self.pc = 0
         self.dr = 0
         self.ir = 0
@@ -129,15 +131,19 @@ class DataPath:
                 self.tr3 = self.data_memory[self.in_add]
             logging.debug("input: %s", repr(symbol))
 
+    def signal_output(self):
+        value = self.data_memory[self.ar]
+        if self.ar == self.int_out_add:
+            symbol = value
+        else:
+            symbol = chr(value)
+        logging.debug("output_buffer: %s << %s", repr("".join(self.output_buffer)), repr(symbol))
+        self.output_buffer.append(str(symbol))
+
     def signal_wr(self):
         self.data_memory[self.ar] = self.alu.result
-        if self.ar == self.out_add:
+        if self.ar == self.chr_out_add or self.ar == self.int_out_add:
             self.signal_output()
-
-    def signal_output(self):
-        symbol = chr(self.data_memory[self.out_add])
-        logging.debug("output_buffer: %s << %s", repr("".join(self.output_buffer)), repr(symbol))
-        self.output_buffer.append(symbol)
 
     def signal_execute_alu_op(self, operation, left_sel: Selectors = None, right_sel: Selectors = None):
         src_a = None
@@ -221,12 +227,16 @@ class ControlUnit:
 
     def execute_rrr(self, code: object):
         if code["opcode"] == Opcode.ADD:
-            self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
-            self.data_path.signal_latch_ar()
+            if code["arg1"] == "sr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_1)
+            elif code["arg1"] == "sr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
+            else:
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
+            self.data_path.signal_latch_dr_direct()
             self.inc_tick()
 
-            self.data_path.signal_latch_dr()
-            if code["arg1"] == "sr1":
+            if code["arg2"] == "sr1":
                 self.data_path.signal_execute_alu_op(
                     ALUOpcode.ADD, left_sel=Selectors.FROM_SR_1, right_sel=Selectors.FROM_DR
                 )
@@ -238,7 +248,7 @@ class ControlUnit:
                 self.data_path.signal_execute_alu_op(
                     ALUOpcode.ADD, left_sel=Selectors.FROM_SR_3, right_sel=Selectors.FROM_DR
                 )
-            self.data_path.signal_latch_sr(Selectors.FROM_ALU)
+            self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
 
     def execute_rri(self, code: object, ps: dict):
@@ -259,7 +269,7 @@ class ControlUnit:
             self.inc_tick()
 
             self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
-            if self.data_path.ar == 98:
+            if self.data_path.ar == 0:
                 self.data_path.signal_latch_sr(Selectors.FROM_INPUT, code["arg1"])
             else:
                 self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
@@ -297,8 +307,7 @@ class ControlUnit:
                 self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
             else:
                 self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
-
-            self.data_path.dr = self.data_path.alu.result
+            self.data_path.signal_latch_dr_direct()
             self.inc_tick()
 
             if code["arg2"] == "sr1":
@@ -312,6 +321,29 @@ class ControlUnit:
             else:
                 self.data_path.signal_execute_alu_op(
                     ALUOpcode.CMP, left_sel=Selectors.FROM_SR_3, right_sel=Selectors.FROM_DR
+                )
+            self.inc_tick()
+        elif code["opcode"] == Opcode.TEST:
+            if code["arg1"] == "sr1":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_1)
+            elif code["arg1"] == "sr2":
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_2)
+            else:
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_SR_3)
+            self.data_path.signal_latch_dr_direct()
+            self.inc_tick()
+
+            if code["arg2"] == "sr1":
+                self.data_path.signal_execute_alu_op(
+                    ALUOpcode.TEST, left_sel=Selectors.FROM_SR_1, right_sel=Selectors.FROM_DR
+                )
+            elif code["arg2"] == "sr2":
+                self.data_path.signal_execute_alu_op(
+                    ALUOpcode.TEST, left_sel=Selectors.FROM_SR_2, right_sel=Selectors.FROM_DR
+                )
+            else:
+                self.data_path.signal_execute_alu_op(
+                    ALUOpcode.TEST, left_sel=Selectors.FROM_SR_3, right_sel=Selectors.FROM_DR
                 )
             self.inc_tick()
 
@@ -353,7 +385,7 @@ class ControlUnit:
             self.inc_tick()
 
         elif code["opcode"] == Opcode.IRET:
-            self.data_path.dr = 97
+            self.data_path.dr = 3
             self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
             self.data_path.signal_latch_ar()
             self.inc_tick()
@@ -376,6 +408,12 @@ class ControlUnit:
                 self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
                 self.data_path.signal_latch_pc()
                 self.inc_tick()
+        elif code["opcode"] == Opcode.JG:
+            if not ps["N"]:
+                self.data_path.dr = code["arg1"]
+                self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
+                self.data_path.signal_latch_pc()
+                self.inc_tick()
         elif code["opcode"] == Opcode.JMP:
             self.data_path.dr = code["arg1"]
             self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
@@ -383,8 +421,8 @@ class ControlUnit:
             self.inc_tick()
 
     def go_to_interrupt(self):
-        self.data_path.dr = 97
-        #  сохранение pc в память
+        self.data_path.dr = 3
+        #  Сохраняем на стеке PS и PC
         self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
         self.data_path.signal_latch_ar()
         self.inc_tick()
@@ -440,9 +478,9 @@ class ControlUnit:
             self.data_path.pc,
             self.data_path.ir["opcode"],
             self.data_path.dr,
-            (self.data_path.tr1 if self.data_path.tr1 else "None"),
-            (self.data_path.tr2 if self.data_path.tr2 else "None"),
-            (self.data_path.tr3 if self.data_path.tr3 else "None"),
+            (self.data_path.sr1 if self.data_path.sr1 or self.data_path.sr1 == 0 else "None"),
+            (self.data_path.sr2 if self.data_path.sr2 or self.data_path.sr2 == 0 else "None"),
+            (self.data_path.sr3 if self.data_path.sr3 or self.data_path.sr3 == 0 else "None"),
             self.data_path.ar,
             (1 if self.data_path.ps["N"] else 0),
             (1 if self.data_path.ps["Z"] else 0),
@@ -489,7 +527,7 @@ def main(code_file: str, memory_file: str, input_file: str | None = None):
                 tokens.append(char)
 
     output, instr_counter, ticks = simulation(
-        code, memory, tokens=tokens, data_memory_size=100, instr_memory_size=100, limit=100
+        code, memory, tokens=tokens, data_memory_size=100, instr_memory_size=100, limit=600
     )
 
     print("".join(output))
