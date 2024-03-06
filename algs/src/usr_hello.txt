@@ -1,0 +1,93 @@
+_interrupt:
+    di
+    load sr1 (in_port)
+    load sr3 line_feed
+    cmp sr3 sr1
+    jne _continue
+    load sr2 flag
+    inc sr2
+    store sr2 flag
+    _continue:
+        store sr1 (buffer)
+        load sr3 buffer
+        dec sr3
+        store sr3 buffer
+        load sr3 buffer_len
+        inc sr3
+        store sr3 buffer_len
+        iret
+
+message:
+    .word 'What is your name?\'
+message_pointer:
+    .word message
+null_symb:
+    .word '\'
+greeting:
+    .word 'Hello, \'
+greeting_pointer:
+    .word greeting
+in_port:
+    .word 0
+out_port:
+    .word 1
+flag:
+    .word 0
+line_feed:
+    .word 10
+buffer:
+    .word 99
+buffer_len:
+    .word 0
+cmp_zero:
+    .word 0
+
+_start:
+    load sr1 message_pointer
+    load sr2 null_symb
+    _message_loop:
+        load sr3 (sr1)
+        cmp sr3 sr2
+        je _end_ml
+        load sr3 (sr1)
+        store sr3 (out_port)
+        inc sr1
+        jmp _message_loop
+    _end_ml:
+        load sr1 line_feed
+        store sr1 (out_port)
+        ei
+    _spin_loop:
+        load sr1 flag
+        load sr2 cmp_zero
+        cmp sr1 sr2
+        je _spin_loop
+    di
+    load sr1 greeting_pointer
+    load sr2 null_symb
+    _greeting_loop:
+        load sr3 (sr1)
+        cmp sr3 sr2
+        je _end_gl
+        load sr3 (sr1)
+        store sr3 (out_port)
+        inc sr1
+        jmp _greeting_loop
+    _end_gl:
+        load sr2 buffer_len
+        load sr1 buffer
+        add sr1 sr2
+        store sr1 buffer
+    _name_loop:
+        load sr3 (buffer)
+        store sr3 (out_port)
+        load sr1 buffer
+        dec sr1
+        store sr1 buffer
+        load sr1 buffer_len
+        dec sr1
+        store sr1 buffer_len
+        load sr3 cmp_zero
+        cmp sr1 sr3
+        jne _name_loop
+    halt

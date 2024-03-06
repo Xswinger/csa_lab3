@@ -28,6 +28,7 @@ def symbol_to_opcode(symbol):
         "test": Opcode.TEST,
         "jne": Opcode.JNE,
         "je": Opcode.JE,
+        "jg": Opcode.JG,
         "jmp": Opcode.JMP,
     }.get(symbol, Opcode.NOP)
 
@@ -50,7 +51,7 @@ def lines_to_words_and_labels(code_lines) -> tuple[dict, dict]:
     labels = {}
     words = {}
     position = 0
-    memory_position = 0
+    memory_position = 4
     for line in code_lines:
         if line[-1] == ":":
             if line[0] != "_":
@@ -145,10 +146,13 @@ def to_machine_code(raw_code, _start_position) -> list:
                 "is_indirect": word[-1],
             }
         elif len(word) == 3:
+            arg = word[1]
+            if word[0] in ("jne", "je", "jg", "jmp"):
+                arg += 1
             instr = {
                 "index": index + 1,
                 "opcode": symbol_to_opcode(word[0]),
-                "arg1": word[1],
+                "arg1": arg,
                 "arg2": 0,
                 "arg3": 0,
                 "is_indirect": word[-1],
