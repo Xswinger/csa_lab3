@@ -98,7 +98,7 @@ def handle_word(position, memory_position, word_line, words, labels) -> tuple[in
     return position, memory_position, words
 
 
-# подмена меток на индексы + установка вида адресации (True - косвенный)
+# подмена меток на индексы + установка вида адресации (true - косвенный)
 def link_labels(words, labels) -> dict:
     replaced = {}
     for w_index, word in words.items():
