@@ -54,8 +54,8 @@ class Selectors(str, Enum):
 
 
 rrr_format_instr = [Opcode.ADD]
-rri_format_instr = [Opcode.STORE, Opcode.LOAD, Opcode.ADDI, Opcode.CMP, Opcode.TEST]
-ri_format_instr = [Opcode.INC, Opcode.DEC]
+rri_format_instr = [Opcode.ADDI, Opcode.CMP, Opcode.TEST]
+ri_format_instr = [Opcode.STORE, Opcode.LOAD, Opcode.INC, Opcode.DEC]
 i_format_instr = [Opcode.NOP, Opcode.HALT, Opcode.IRET, Opcode.JNE, Opcode.JE, Opcode.JG, Opcode.JMP]
 
 
