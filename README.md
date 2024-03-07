@@ -386,20 +386,20 @@ platform linux -- Python 3.11.8, pytest-7.4.4, pluggy-1.4.0
 rootdir: /home/runner/work/csa_lab3/csa_lab3
 configfile: pyproject.toml
 plugins: golden-0.2.2
-collected 2 items
+collected 4 items
 
-integration_test.py ..                                                   [100%]
+integration_test.py ....                                                 [100%]
 
-============================== 2 passed in 0.20s ===============================
+============================== 4 passed in 0.70s ===============================
 Name                  Stmts   Miss  Cover   Missing
 ---------------------------------------------------
-alu.py                   60      5    92%   17, 52, 56, 62, 70
+alu.py                   60      2    97%   17, 70
 integration_test.py      32      0   100%
-isa.py                   54      1    98%   51
-machine.py              348     59    83%   124, 126, 199, 201, 213, 222-241, 246, 268-290, 296, 304, 322, 328-337, 341, 368-371, 374-377, 499-506
-translator.py           117      7    94%   87, 161-171, 203-206
+isa.py                   56      1    98%   53
+machine.py              377     35    91%   129, 206, 208, 233, 248, 256-278, 306-309, 314, 322, 355, 365, 374, 506, 538-545
+translator.py           120      7    94%   89, 166-176, 208-211
 ---------------------------------------------------
-TOTAL                   611     72    88%
+TOTAL                   645     45    93%
 ```
 
 ```text

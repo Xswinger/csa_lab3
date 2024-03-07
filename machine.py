@@ -110,7 +110,7 @@ class DataPath:
         self.ps["INT_EN"] = False
 
     # установка временных регистров (по результату АЛУ или из буфера ввода)
-    def signal_latch_sr(self, sel: Selectors, reg_name: str):
+    def signal_latch_tr(self, sel: Selectors, reg_name: str):
         assert sel in {Selectors.FROM_INPUT, Selectors.FROM_ALU}, f"Unknown selector '{sel}'"
         if sel == Selectors.FROM_ALU:
             if reg_name == "tr1":
@@ -248,13 +248,13 @@ class ControlUnit:
                 self.data_path.signal_execute_alu_op(
                     ALUOpcode.ADD, left_sel=Selectors.FROM_TR_3, right_sel=Selectors.FROM_DR
                 )
-            self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
+            self.data_path.signal_latch_tr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
 
     def execute_rri(self, code: object, ps: dict):
         if code["opcode"] == Opcode.ADDI:
             self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_TR_1)
-            self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
+            self.data_path.signal_latch_tr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
 
             self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
@@ -274,7 +274,7 @@ class ControlUnit:
                 self.data_path.signal_execute_alu_op(
                     ALUOpcode.ADD, left_sel=Selectors.FROM_TR_3, right_sel=Selectors.FROM_DR
                 )
-            self.data_path.signal_latch_sr(Selectors.FROM_ALU)
+            self.data_path.signal_latch_tr(Selectors.FROM_ALU)
             self.inc_tick()
 
         elif code["opcode"] == Opcode.CMP:
@@ -343,9 +343,9 @@ class ControlUnit:
 
             self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_B, right_sel=Selectors.FROM_DR)
             if self.data_path.ar == 0:
-                self.data_path.signal_latch_sr(Selectors.FROM_INPUT, code["arg1"])
+                self.data_path.signal_latch_tr(Selectors.FROM_INPUT, code["arg1"])
             else:
-                self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
+                self.data_path.signal_latch_tr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
 
         elif code["opcode"] == Opcode.INC:
@@ -356,7 +356,7 @@ class ControlUnit:
             else:
                 self.data_path.signal_execute_alu_op(ALUOpcode.INC_A, left_sel=Selectors.FROM_TR_3)
 
-            self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
+            self.data_path.signal_latch_tr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
         elif code["opcode"] == Opcode.DEC:
             if code["arg1"] == "tr1":
@@ -366,7 +366,7 @@ class ControlUnit:
             else:
                 self.data_path.signal_execute_alu_op(ALUOpcode.DEC_A, left_sel=Selectors.FROM_TR_3)
 
-            self.data_path.signal_latch_sr(Selectors.FROM_ALU, code["arg1"])
+            self.data_path.signal_latch_tr(Selectors.FROM_ALU, code["arg1"])
             self.inc_tick()
 
     def execute_i(self, code: object, ps: dict):
