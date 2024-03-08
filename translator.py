@@ -42,7 +42,7 @@ def read_lines(source_filename: str) -> tuple[list[str], int]:
     return lines, source_loc
 
 
-# строки кода в инструкции и метки
+# преобразование строк кода в инструкции и метки
 def lines_to_words_and_labels(code_lines) -> tuple[dict, dict]:
     labels = {}
     prog_line = {}

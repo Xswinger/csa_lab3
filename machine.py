@@ -23,7 +23,6 @@ class DataPath:
 
     instr_memory = None
 
-    # регистр адреса в памяти
     ar = None
 
     pc = None
@@ -32,14 +31,15 @@ class DataPath:
 
     ir = None
 
+    # порты
     int_out_add = None
     chr_out_add = None
     in_add = None
 
+    # регистры временного хранения
     tr1 = None
     tr2 = None
     tr3 = None
-    # saved регистры
 
     ps = None
 
@@ -300,6 +300,7 @@ class ControlUnit:
                     ALUOpcode.CMP, left_sel=Selectors.FROM_TR_3, right_sel=Selectors.FROM_DR
                 )
             self.inc_tick()
+            
         elif code["opcode"] == Opcode.TEST:
             if code["arg1"] == "tr1":
                 self.data_path.signal_execute_alu_op(ALUOpcode.SKIP_A, left_sel=Selectors.FROM_TR_1)
